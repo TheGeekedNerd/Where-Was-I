@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+}
+
+.field-input:focus,
+.primary-btn:focus,
+.social-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+}
+.auth-card {
+  background: #111111;
+  border: 1px solid rgba(0, 255, 137, 0.25);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 340px;
+}
+.auth-title {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #00ff89;
+}
+.auth-sub {
+  font-size: 13px;
+  color: rgba(0, 255, 137, 0.55);
+  margin-bottom: 1.5rem;
+}
+.field-label {
+  display: block;
+  font-size: 12px;
+  color: rgba(0, 255, 137, 0.55);
+  margin-bottom: 4px;
+}
+.field-input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid rgba(0, 255, 137, 0.3);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  outline: none;
+  background: rgba(0, 255, 137, 0.07);
+  color: #00ff89;
+  box-sizing: border-box;
+}
+.field-input::placeholder {
+  color: rgba(0, 255, 137, 0.35);
+}
+.field-input:focus {
+  border-color: rgba(0, 255, 137, 0.7);
+}
+.primary-btn {
+  width: 100%;
+  padding: 9px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  background: #00ff89;
+  color: #000000;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+.primary-btn:hover {
+  background: #00e07a;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(0, 255, 137, 0.2);
+}
+.divider-text {
+  font-size: 12px;
+  color: rgba(0, 255, 137, 0.4);
+}
+.social-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+}
+.social-btn {
+  flex: 1;
+  padding: 8px;
+  font-size: 13px;
+  border: 1px solid rgba(0, 255, 137, 0.3);
+  border-radius: 8px;
+  background: rgba(0, 255, 137, 0.07);
+  color: #00ff89;
+  cursor: pointer;
+}
+.social-btn:hover {
+  background: rgba(0, 255, 137, 0.14);
+}
+.switch-text {
+  font-size: 12px;
+  color: rgba(0, 255, 137, 0.55);
+  text-align: center;
+}
+.switch-link {
+  color: #00ff89;
+  font-weight: 500;
+}
