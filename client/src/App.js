@@ -8,7 +8,8 @@ import Dashboard from './pages/Dashboard'
 function ProtectedRoute({ children }) {
   const { isAuthenticated, isLoading } = useAuth0()
   if (isLoading) return React.createElement('div', null, 'Loading...')
-  return isAuthenticated ? children : React.createElement(Navigate, { to: '/login', replace: true })
+  if (!isAuthenticated) return React.createElement(Navigate, { to: '/login', replace: true })
+  return children
 }
 
 function RootRedirect() {
