@@ -237,3 +237,10 @@ html, body {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.auth-message {
+  color: #e74c3c;
+  font-size: 0.875rem;
+  margin-bottom: 12px;
+  text-align: center;
+}
