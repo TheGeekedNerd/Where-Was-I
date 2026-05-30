@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import './auth.css'
@@ -8,27 +8,8 @@ function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
-  const { loginWithRedirect, isAuthenticated, user } = useAuth0()
+  const { loginWithRedirect } = useAuth0()
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
-
-  // Handle Google redirect back to login page
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      fetch(`${API_URL}/auth/google`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: user.email, googleId: user.sub, username: user.name })
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.message === 'Account does not exist') {
-            navigate('/register', { state: { message: 'Account does not exist' } })
-          } else {
-            navigate('/dashboard')
-          }
-        })
-    }
-  }, [isAuthenticated, user])
 
   const handleLogin = async () => {
     if (!email || !password) return setMessage('Please fill in all fields')

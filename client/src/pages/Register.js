@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import './auth.css'
@@ -6,30 +6,12 @@ import './auth.css'
 function Register() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { loginWithRedirect, isAuthenticated, user } = useAuth0()
+  const { loginWithRedirect } = useAuth0()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState(location.state?.message || '')
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
-
-  // Handle Google redirect back to register page
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      fetch(`${API_URL}/auth/google`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: user.email, googleId: user.sub, username: user.name })
-      })
-        .then(res => res.json())
-        .then(data => {
-          setMessage(data.message)
-          if (data.message === 'Account successfully created') {
-            setTimeout(() => navigate('/dashboard'), 2000)
-          }
-        })
-    }
-  }, [isAuthenticated, user])
 
   const handleRegister = async () => {
     if (!username || !email || !password) return setMessage('Please fill in all fields')
