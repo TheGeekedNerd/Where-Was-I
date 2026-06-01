@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import Login from './pages/Login'
@@ -19,9 +19,17 @@ function ProtectedRoute({ children }) {
 }
 
 function RootRedirect() {
-  const { isAuthenticated, isLoading } = useAuth0()
+  const { isAuthenticated, isLoading, logout } = useAuth0()
+
+  useEffect(() => {
+    localStorage.removeItem('token')
+    if (isAuthenticated) {
+      logout({ logoutParams: { returnTo: window.location.origin + '/login' } })
+    }
+  }, [isAuthenticated])
+
   if (isLoading) return React.createElement('div', null, 'Loading...')
-  return React.createElement(Navigate, { to: isLoggedIn(isAuthenticated) ? '/dashboard' : '/login', replace: true })
+  return React.createElement(Navigate, { to: '/login', replace: true })
 }
 
 function App() {
