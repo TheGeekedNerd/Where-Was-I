@@ -44,9 +44,28 @@ function Login() {
         React.createElement('p', { className: 'auth-sub' }, 'Log in to your account'),
         message && React.createElement('p', { className: 'auth-message' }, message),
         React.createElement('label', { className: 'field-label' }, 'Email'),
-        React.createElement('input', { className: 'field-input', type: 'email', placeholder: 'you@email.com', onChange: (e) => setEmail(e.target.value) }),
+        React.createElement('input', {
+          className: 'field-input',
+          type: 'email',
+          placeholder: 'you@email.com',
+          onChange: (e) => setEmail(e.target.value)
+        }),
         React.createElement('label', { className: 'field-label' }, 'Password'),
-        React.createElement('input', { className: 'field-input', type: 'password', placeholder: '••••••••', onChange: (e) => setPassword(e.target.value) }),
+        React.createElement('input', {
+          className: 'field-input',
+          type: 'password',
+          placeholder: '••••••••',
+          onChange: (e) => setPassword(e.target.value)
+        }),
+        React.createElement('p', {
+          className: 'switch-text',
+          style: { textAlign: 'right', marginBottom: '14px', marginTop: '-8px' }
+        },
+          React.createElement('span', {
+            className: 'switch-link',
+            onClick: () => navigate('/forgot-password')
+          }, 'Forgot password?')
+        ),
         React.createElement('button', { className: 'primary-btn', onClick: handleLogin }, 'Log in'),
         React.createElement('div', { className: 'divider' },
           React.createElement('div', { className: 'divider-line' }),
@@ -65,4 +84,5 @@ function Login() {
     )
   )
 }
+
 export default Login
