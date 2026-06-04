@@ -3,11 +3,13 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const nodemailer = require('nodemailer')
+const { Resend } = require('resend')
 const crypto = require('crypto')
 require('dotenv').config()
 
 const app = express()
+const resend = new Resend(process.env.RESEND_API_KEY)
+
 app.use(cors())
 app.use(express.json())
 
@@ -95,16 +97,8 @@ app.post('/auth/forgot-password', async (req, res) => {
 
     const resetLink = `${process.env.CLIENT_URL}/reset-password/${token}`
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
-    })
-
-    await transporter.sendMail({
-      from: `"Where Was I" <${process.env.EMAIL_USER}>`,
+    await resend.emails.send({
+      from: 'onboarding@resend.dev',
       to: user.email,
       subject: 'Password Reset',
       html: `
