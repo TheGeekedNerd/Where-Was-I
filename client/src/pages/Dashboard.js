@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
+import './Dashboard.css'
+import { IconSettings, IconDeviceGamepad2, IconLayoutDashboard, IconZoom, IconTrophy } from '@tabler/icons-react'
+
 function Dashboard() {
   const { user, isAuthenticated } = useAuth0()
+  const navigate = useNavigate()
   const [message, setMessage] = useState('')
+  const [activePage, setActivePage] = useState('overview')
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+
   useEffect(() => {
     if (isAuthenticated && user && (user.sub.startsWith('google-oauth2') || user.sub.includes('discord'))) {
       fetch(`${API_URL}/auth/google`, {
@@ -18,15 +25,73 @@ function Dashboard() {
         })
     }
   }, [isAuthenticated, user])
-  return React.createElement('div', null,
-    message && React.createElement('p', { style: { 
-      color: message === 'Account successfully created' ? 'green' : 'orange',
-      textAlign: 'center',
-      padding: '10px',
-      fontSize: '18px',
-      fontWeight: 'bold'
-    }}, message),
-    React.createElement('div', null, 'Dashboard')
+
+  return React.createElement('div', { className: 'dashboard-wrapper' },
+
+    React.createElement('nav', { className: 'navbar' },
+      React.createElement('span', { className: 'nav-logo' }, 'Where Was I'),
+      React.createElement('div', { className: 'nav-links' },
+
+        React.createElement('span', {
+          className: `nav-link ${activePage === 'overview' ? 'active' : ''}`,
+          onClick: () => setActivePage('overview')
+        },
+          React.createElement(IconLayoutDashboard, { size: 18, stroke: 1.5 }),
+          ' Overview'
+        ),
+
+        React.createElement('span', {
+          className: `nav-link ${activePage === 'my-games' ? 'active' : ''}`,
+          onClick: () => setActivePage('my-games')
+        },
+          React.createElement(IconDeviceGamepad2, { size: 18, stroke: 1.5 }),
+          ' My Games'
+        ),
+
+        React.createElement('span', {
+          className: `nav-link ${activePage === 'discover' ? 'active' : ''}`,
+          onClick: () => setActivePage('discover')
+        },
+          React.createElement(IconZoom, { size: 18, stroke: 1.5 }),
+          ' Discover'
+        ),
+
+        React.createElement('span', {
+          className: `nav-link ${activePage === 'completed' ? 'active' : ''}`,
+          onClick: () => setActivePage('completed')
+        },
+          React.createElement(IconTrophy, { size: 18, stroke: 1.5 }),
+          ' Completed'
+        ),
+
+        React.createElement('span', {
+          className: `nav-link ${activePage === 'settings' ? 'active' : ''}`,
+          onClick: () => setActivePage('settings')
+        },
+          React.createElement(IconSettings, { size: 18, stroke: 1.5 }),
+          ' Settings'
+        )
+      )
+    ),
+
+    message && React.createElement('p', {
+      style: {
+        color: message === 'Account successfully created' ? 'green' : 'orange',
+        textAlign: 'center',
+        padding: '10px',
+        fontSize: '18px',
+        fontWeight: 'bold'
+      }
+    }, message),
+
+    React.createElement('div', { className: 'dashboard-content' },
+      activePage === 'overview' && React.createElement('div', null, 'Overview page'),
+      activePage === 'my-games' && React.createElement('div', null, 'My Games page'),
+      activePage === 'discover' && React.createElement('div', null, 'Discover page'),
+      activePage === 'completed' && React.createElement('div', null, 'Completed page'),
+      activePage === 'settings' && React.createElement('div', null, 'Settings page')
+    )
   )
 }
+
 export default Dashboard
