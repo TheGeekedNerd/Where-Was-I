@@ -20,12 +20,13 @@ function Login() {
         body: JSON.stringify({ email, password })
       })
       const data = await res.json()
-      setMessage(data.message)
+
       if (res.ok) {
         localStorage.setItem('token', data.token)
         navigate('/dashboard')
+      } else {
+        setMessage(data.message)
       }
-      if (res.status === 404) navigate('/register', { state: { message: 'Account does not exist' } })
     } catch (err) {
       setMessage('Server error')
     }
