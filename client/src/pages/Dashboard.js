@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import './Dashboard.css'
 import Overview from './Overview'
+import Discover from './Discover'
 import { IconSettings, IconDeviceGamepad2, IconLayoutDashboard, IconZoom, IconTrophy } from '@tabler/icons-react'
+
+const ce = React.createElement
 
 function Dashboard() {
   const { user, isAuthenticated } = useAuth0()
@@ -28,31 +31,31 @@ function Dashboard() {
   }, [isAuthenticated, user])
 
   const navLinks = [
-    { key: 'overview',   Icon: IconLayoutDashboard, label: 'Overview' },
-    { key: 'my-games',   Icon: IconDeviceGamepad2,  label: 'My Games' },
-    { key: 'discover',   Icon: IconZoom,            label: 'Discover' },
-    { key: 'completed',  Icon: IconTrophy,          label: 'Completed' },
-    { key: 'settings',   Icon: IconSettings,        label: 'Settings' },
+    { key: 'overview',  Icon: IconLayoutDashboard, label: 'Overview'  },
+    { key: 'my-games',  Icon: IconDeviceGamepad2,  label: 'My Games'  },
+    { key: 'discover',  Icon: IconZoom,            label: 'Discover'  },
+    { key: 'completed', Icon: IconTrophy,          label: 'Completed' },
+    { key: 'settings',  Icon: IconSettings,        label: 'Settings'  },
   ]
 
-  return React.createElement('div', { className: 'dashboard-wrapper' },
-    React.createElement('nav', { className: 'navbar' },
-      React.createElement('span', { className: 'nav-logo' }, 'Where Was I'),
-      React.createElement('div', { className: 'nav-links' },
+  return ce('div', { className: 'dashboard-wrapper' },
+    ce('nav', { className: 'navbar' },
+      ce('span', { className: 'nav-logo' }, 'Where Was I'),
+      ce('div', { className: 'nav-links' },
         ...navLinks.map(({ key, Icon, label }) =>
-          React.createElement('span', {
+          ce('span', {
             key,
             className: `nav-link ${activePage === key ? 'active' : ''}`,
             onClick: () => setActivePage(key)
           },
-            React.createElement(Icon, { size: 18, stroke: 1.5 }),
+            ce(Icon, { size: 18, stroke: 1.5 }),
             ' ' + label
           )
         )
       )
     ),
 
-    message && React.createElement('p', {
+    message && ce('p', {
       style: {
         color: message === 'Account successfully created' ? 'green' : 'orange',
         textAlign: 'center',
@@ -62,12 +65,12 @@ function Dashboard() {
       }
     }, message),
 
-    React.createElement('div', { className: 'dashboard-content' },
-      activePage === 'overview'  && React.createElement(Overview),
-      activePage === 'my-games'  && React.createElement('div', null, 'My Games page'),
-      activePage === 'discover'  && React.createElement('div', null, 'Discover page'),
-      activePage === 'completed' && React.createElement('div', null, 'Completed page'),
-      activePage === 'settings'  && React.createElement('div', null, 'Settings page')
+    ce('div', { className: 'dashboard-content' },
+      activePage === 'overview'  && ce(Overview),
+      activePage === 'my-games'  && ce('div', null, 'My Games page'),
+      activePage === 'discover'  && ce(Discover),
+      activePage === 'completed' && ce('div', null, 'Completed page'),
+      activePage === 'settings'  && ce('div', null, 'Settings page'),
     )
   )
 }
