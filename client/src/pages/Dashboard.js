@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import './Dashboard.css'
+import Overview from './Overview'
 import { IconSettings, IconDeviceGamepad2, IconLayoutDashboard, IconZoom, IconTrophy } from '@tabler/icons-react'
 
 function Dashboard() {
@@ -26,50 +27,27 @@ function Dashboard() {
     }
   }, [isAuthenticated, user])
 
-  return React.createElement('div', { className: 'dashboard-wrapper' },
+  const navLinks = [
+    { key: 'overview',   Icon: IconLayoutDashboard, label: 'Overview' },
+    { key: 'my-games',   Icon: IconDeviceGamepad2,  label: 'My Games' },
+    { key: 'discover',   Icon: IconZoom,            label: 'Discover' },
+    { key: 'completed',  Icon: IconTrophy,          label: 'Completed' },
+    { key: 'settings',   Icon: IconSettings,        label: 'Settings' },
+  ]
 
+  return React.createElement('div', { className: 'dashboard-wrapper' },
     React.createElement('nav', { className: 'navbar' },
       React.createElement('span', { className: 'nav-logo' }, 'Where Was I'),
       React.createElement('div', { className: 'nav-links' },
-
-        React.createElement('span', {
-          className: `nav-link ${activePage === 'overview' ? 'active' : ''}`,
-          onClick: () => setActivePage('overview')
-        },
-          React.createElement(IconLayoutDashboard, { size: 18, stroke: 1.5 }),
-          ' Overview'
-        ),
-
-        React.createElement('span', {
-          className: `nav-link ${activePage === 'my-games' ? 'active' : ''}`,
-          onClick: () => setActivePage('my-games')
-        },
-          React.createElement(IconDeviceGamepad2, { size: 18, stroke: 1.5 }),
-          ' My Games'
-        ),
-
-        React.createElement('span', {
-          className: `nav-link ${activePage === 'discover' ? 'active' : ''}`,
-          onClick: () => setActivePage('discover')
-        },
-          React.createElement(IconZoom, { size: 18, stroke: 1.5 }),
-          ' Discover'
-        ),
-
-        React.createElement('span', {
-          className: `nav-link ${activePage === 'completed' ? 'active' : ''}`,
-          onClick: () => setActivePage('completed')
-        },
-          React.createElement(IconTrophy, { size: 18, stroke: 1.5 }),
-          ' Completed'
-        ),
-
-        React.createElement('span', {
-          className: `nav-link ${activePage === 'settings' ? 'active' : ''}`,
-          onClick: () => setActivePage('settings')
-        },
-          React.createElement(IconSettings, { size: 18, stroke: 1.5 }),
-          ' Settings'
+        ...navLinks.map(({ key, Icon, label }) =>
+          React.createElement('span', {
+            key,
+            className: `nav-link ${activePage === key ? 'active' : ''}`,
+            onClick: () => setActivePage(key)
+          },
+            React.createElement(Icon, { size: 18, stroke: 1.5 }),
+            ' ' + label
+          )
         )
       )
     ),
@@ -85,11 +63,11 @@ function Dashboard() {
     }, message),
 
     React.createElement('div', { className: 'dashboard-content' },
-      activePage === 'overview' && React.createElement('div', null, 'Overview page'),
-      activePage === 'my-games' && React.createElement('div', null, 'My Games page'),
-      activePage === 'discover' && React.createElement('div', null, 'Discover page'),
+      activePage === 'overview'  && React.createElement(Overview),
+      activePage === 'my-games'  && React.createElement('div', null, 'My Games page'),
+      activePage === 'discover'  && React.createElement('div', null, 'Discover page'),
       activePage === 'completed' && React.createElement('div', null, 'Completed page'),
-      activePage === 'settings' && React.createElement('div', null, 'Settings page')
+      activePage === 'settings'  && React.createElement('div', null, 'Settings page')
     )
   )
 }
