@@ -2,7 +2,7 @@ const express = require('express')
 const router  = express.Router()
 const Game    = require('../models/Game')
 
-// GET /library — fetch all games for the logged-in user
+// GET /library
 router.get('/', async (req, res) => {
   try {
     const games = await Game.find({ userId: req.userId }).sort({ addedAt: -1 })
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-// POST /library — add a game
+// POST /library
 router.post('/', async (req, res) => {
   const { rawgId, title, cover, rating, released, genres, platforms, playtime, slug } = req.body
   if (!rawgId || !title) return res.status(400).json({ message: 'rawgId and title are required' })
@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-// DELETE /library/:rawgId — remove a game
+// DELETE /library/:rawgId
 router.delete('/:rawgId', async (req, res) => {
   try {
     const result = await Game.findOneAndDelete({ userId: req.userId, rawgId: Number(req.params.rawgId) })
@@ -39,19 +39,31 @@ router.delete('/:rawgId', async (req, res) => {
   }
 })
 
-// PATCH /library/:rawgId/status — update play status
+// PATCH /library/:rawgId/status
 router.patch('/:rawgId/status', async (req, res) => {
   const { status } = req.body
   if (!['playing', 'completed', 'dropped'].includes(status))
     return res.status(400).json({ message: 'Invalid status' })
   try {
-    const game = await Game.findOneAndUpdate(
+    const game = await Game.findOne({ userId: req.userId, rawgId: Number(req.params.rawgId) })
+    if (!game) return res.status(404).json({ message: 'Game not found in library' })
+
+    const wasCompleted = game.status === 'completed'
+    const nowCompleted = status === 'completed'
+
+    // Only increment if transitioning INTO completed (not already completed)
+    const update = { status }
+    if (nowCompleted && !wasCompleted) {
+      update.$inc = { playthroughs: 1 }
+    }
+
+    const updated = await Game.findOneAndUpdate(
       { userId: req.userId, rawgId: Number(req.params.rawgId) },
-      { status },
+      update,
       { new: true }
     )
-    if (!game) return res.status(404).json({ message: 'Game not found in library' })
-    res.json(game)
+
+    res.json(updated)
   } catch {
     res.status(500).json({ message: 'Server error' })
   }
