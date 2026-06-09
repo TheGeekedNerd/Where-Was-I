@@ -7,6 +7,8 @@ const { Resend } = require('resend')
 const crypto = require('crypto')
 require('dotenv').config()
 
+const libraryRoutes = require('./routes/library')
+
 const app = express()
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -222,6 +224,9 @@ app.delete('/user/delete', requireAuth, async (req, res) => {
     res.status(500).json({ message: 'Server error' })
   }
 })
+
+// Library routes (requireAuth applied here so the router doesn't need to import it)
+app.use('/library', requireAuth, libraryRoutes)
 
 app.get('/', (req, res) => res.send('Where Was I API running'))
 app.listen(5000, () => console.log('Server running on port 5000'))
