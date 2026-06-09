@@ -1,21 +1,21 @@
 const mongoose = require('mongoose')
 
 const gameSchema = new mongoose.Schema({
-  userId:    { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  rawgId:    { type: Number, required: true },
-  title:     { type: String, required: true },
-  cover:     { type: String },
-  rating:    { type: String },
-  released:  { type: String },
-  genres:    [{ type: String }],
-  platforms: [{ type: String }],
-  playtime:  { type: String },
-  slug:      { type: String },
-  status:    { type: String, enum: ['playing', 'completed', 'dropped'], default: 'playing' },
-  addedAt:   { type: Date, default: Date.now }
+  userId:       { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  rawgId:       { type: Number, required: true },
+  title:        { type: String, required: true },
+  cover:        { type: String },
+  rating:       { type: String },
+  released:     { type: String },
+  genres:       [{ type: String }],
+  platforms:    [{ type: String }],
+  playtime:     { type: String },
+  slug:         { type: String },
+  status:       { type: String, enum: ['playing', 'completed', 'dropped'], default: 'playing' },
+  playthroughs: { type: Number, default: 0 },
+  addedAt:      { type: Date, default: Date.now }
 })
 
-// One user can only add the same game once
 gameSchema.index({ userId: 1, rawgId: 1 }, { unique: true })
 
 module.exports = mongoose.model('Game', gameSchema)

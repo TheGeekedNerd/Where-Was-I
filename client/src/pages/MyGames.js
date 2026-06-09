@@ -7,6 +7,7 @@ import {
   IconLoader2,
   IconTrash,
   IconChevronDown,
+  IconRepeat,
 } from '@tabler/icons-react'
 
 const ce = React.createElement
@@ -25,12 +26,12 @@ const STATUS_LABELS = {
 const STATUS_OPTIONS = ['playing', 'completed', 'dropped']
 
 export default function MyGames() {
-  const [games, setGames]         = useState([])
-  const [loading, setLoading]     = useState(true)
-  const [removing, setRemoving]   = useState(null)   // rawgId being removed
-  const [updating, setUpdating]   = useState(null)   // rawgId being status-updated
-  const [openMenu, setOpenMenu]   = useState(null)   // rawgId whose status dropdown is open
-  const [filter, setFilter]       = useState('all')  // all | playing | completed | dropped
+  const [games, setGames]       = useState([])
+  const [loading, setLoading]   = useState(true)
+  const [removing, setRemoving] = useState(null)
+  const [updating, setUpdating] = useState(null)
+  const [openMenu, setOpenMenu] = useState(null)
+  const [filter, setFilter]     = useState('all')
 
   useEffect(() => {
     async function fetchLibrary() {
@@ -50,7 +51,6 @@ export default function MyGames() {
     fetchLibrary()
   }, [])
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handler(e) {
       if (!e.target.closest('.mg-status-menu')) setOpenMenu(null)
@@ -84,7 +84,9 @@ export default function MyGames() {
         body:    JSON.stringify({ status })
       })
       const data = await res.json()
-      if (res.ok) setGames(prev => prev.map(g => g.rawgId === rawgId ? { ...g, status: data.status } : g))
+      if (res.ok) {
+        setGames(prev => prev.map(g => g.rawgId === rawgId ? { ...g, status: data.status, playthroughs: data.playthroughs } : g))
+      }
     } catch (err) {
       console.error(err)
     } finally {
@@ -107,7 +109,6 @@ export default function MyGames() {
 
   return ce('div', { className: 'mg-wrapper' },
 
-    // Header
     ce('div', { className: 'mg-header' },
       ce('div', null,
         ce('h1', { className: 'mg-title' }, 'My Games'),
@@ -124,19 +125,16 @@ export default function MyGames() {
       )
     ),
 
-    // Empty state
     filtered.length === 0 && ce('div', { className: 'mg-empty' },
       ce(IconDeviceGamepad2, { size: 40, stroke: 1 }),
       ce('p',    null, filter === 'all' ? 'No games yet' : `No ${filter} games`),
       ce('span', null, filter === 'all' ? 'Head to Discover to add your first game' : 'Change your filter or add more games')
     ),
 
-    // Grid
     filtered.length > 0 && ce('div', { className: 'mg-grid' },
       ...filtered.map(game =>
         ce('div', { key: game.rawgId, className: 'mg-card' },
 
-          // Cover
           ce('div', {
             className: 'mg-card-cover',
             style: { backgroundImage: game.cover ? `url(${game.cover})` : 'none' }
@@ -146,12 +144,11 @@ export default function MyGames() {
             ),
             ce('div', { className: 'mg-card-cover-overlay' }),
 
-            // Remove button
             ce('button', {
               className: 'mg-card-remove',
-              onClick: (e) => { e.stopPropagation(); removeGame(game.rawgId) },
-              disabled: removing === game.rawgId,
-              title: 'Remove from library'
+              onClick:   (e) => { e.stopPropagation(); removeGame(game.rawgId) },
+              disabled:  removing === game.rawgId,
+              title:     'Remove from library'
             },
               removing === game.rawgId
                 ? ce(IconLoader2, { size: 13, stroke: 2, className: 'mg-spin' })
@@ -159,26 +156,29 @@ export default function MyGames() {
             )
           ),
 
-          // Body
           ce('div', { className: 'mg-card-body' },
             ce('p', { className: 'mg-card-genre' },
               game.genres && game.genres.length > 0 ? game.genres.join(' · ') : 'Game'
             ),
             ce('h3', { className: 'mg-card-title' }, game.title),
 
-            // Meta row
             ce('div', { className: 'mg-card-meta' },
               game.rating   && ce('span', null, ce(IconStar,  { size: 12, stroke: 1.5 }), ' ', game.rating),
               game.playtime && ce('span', null, ce(IconClock, { size: 12, stroke: 1.5 }), ' ', game.playtime),
               game.released && ce('span', null, game.released)
             ),
 
-            // Status dropdown
+            // Playthroughs badge — only show if at least 1
+            game.playthroughs > 0 && ce('div', { className: 'mg-playthroughs' },
+              ce(IconRepeat, { size: 12, stroke: 1.5 }),
+              ` ${game.playthroughs} playthrough${game.playthroughs !== 1 ? 's' : ''}`
+            ),
+
             ce('div', { className: 'mg-status-menu' },
               ce('button', {
                 className: `mg-status-btn mg-status-btn--${game.status}`,
-                onClick: (e) => { e.stopPropagation(); setOpenMenu(openMenu === game.rawgId ? null : game.rawgId) },
-                disabled: updating === game.rawgId
+                onClick:   (e) => { e.stopPropagation(); setOpenMenu(openMenu === game.rawgId ? null : game.rawgId) },
+                disabled:  updating === game.rawgId
               },
                 updating === game.rawgId
                   ? ce(IconLoader2, { size: 12, stroke: 2, className: 'mg-spin' })
@@ -188,9 +188,9 @@ export default function MyGames() {
               openMenu === game.rawgId && ce('div', { className: 'mg-status-dropdown' },
                 ...STATUS_OPTIONS.filter(s => s !== game.status).map(s =>
                   ce('button', {
-                    key: s,
+                    key:       s,
                     className: 'mg-status-option',
-                    onClick: (e) => { e.stopPropagation(); changeStatus(game.rawgId, s) }
+                    onClick:   (e) => { e.stopPropagation(); changeStatus(game.rawgId, s) }
                   }, STATUS_LABELS[s])
                 )
               )
