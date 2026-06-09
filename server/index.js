@@ -7,7 +7,7 @@ const { Resend } = require('resend')
 const crypto = require('crypto')
 require('dotenv').config()
 
-const libraryRoutes = require('./routes/library')
+const libraryRoutes = require('./routes/Library')
 
 const app = express()
 const resend = new Resend(process.env.RESEND_API_KEY)
