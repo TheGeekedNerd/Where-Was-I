@@ -34,6 +34,19 @@ function validatePassword(password) {
   return regex.test(password)
 }
 
+function requireAuth(req, res, next) {
+  const header = req.headers.authorization
+  if (!header) return res.status(401).json({ message: 'No token provided' })
+  const token = header.split(' ')[1]
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    req.userId = decoded.id
+    next()
+  } catch {
+    return res.status(401).json({ message: 'Invalid or expired token' })
+  }
+}
+
 // Register
 app.post('/auth/register', async (req, res) => {
   const { username, email, password } = req.body
@@ -136,6 +149,76 @@ app.post('/auth/reset-password', async (req, res) => {
     await user.save()
     res.json({ message: 'Password reset successful' })
   } catch (err) {
+    res.status(500).json({ message: 'Server error' })
+  }
+})
+
+// Get current user
+app.get('/user/me', requireAuth, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select('username email')
+    if (!user) return res.status(404).json({ message: 'User not found' })
+    res.json({ username: user.username, email: user.email })
+  } catch {
+    res.status(500).json({ message: 'Server error' })
+  }
+})
+
+// Update username
+app.patch('/user/update-username', requireAuth, async (req, res) => {
+  const { username } = req.body
+  if (!username || !username.trim()) return res.status(400).json({ message: 'Username cannot be empty' })
+  try {
+    await User.findByIdAndUpdate(req.userId, { username: username.trim() })
+    res.json({ message: 'Username updated' })
+  } catch {
+    res.status(500).json({ message: 'Server error' })
+  }
+})
+
+// Update email
+app.patch('/user/update-email', requireAuth, async (req, res) => {
+  const { email } = req.body
+  if (!email || !email.trim()) return res.status(400).json({ message: 'Email cannot be empty' })
+  try {
+    const existing = await User.findOne({ email: email.trim() })
+    if (existing && existing._id.toString() !== req.userId)
+      return res.status(400).json({ message: 'Email already in use' })
+    await User.findByIdAndUpdate(req.userId, { email: email.trim() })
+    res.json({ message: 'Email updated' })
+  } catch {
+    res.status(500).json({ message: 'Server error' })
+  }
+})
+
+// Change password
+app.patch('/user/change-password', requireAuth, async (req, res) => {
+  const { currentPassword, newPassword } = req.body
+  try {
+    const user = await User.findById(req.userId)
+    if (!user) return res.status(404).json({ message: 'User not found' })
+    if (!user.password) return res.status(400).json({ message: 'This account uses social login' })
+    const isMatch = await bcrypt.compare(currentPassword, user.password)
+    if (!isMatch) return res.status(400).json({ message: 'Current password is incorrect' })
+    if (!validatePassword(newPassword)) {
+      return res.status(400).json({
+        message: 'Password must be at least 10 characters and include uppercase, lowercase, number and special character'
+      })
+    }
+    user.password = await bcrypt.hash(newPassword, 10)
+    await user.save()
+    res.json({ message: 'Password changed' })
+  } catch {
+    res.status(500).json({ message: 'Server error' })
+  }
+})
+
+// Delete account
+app.delete('/user/delete', requireAuth, async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.userId)
+    res.json({ message: 'Account deleted' })
+  } catch {
     res.status(500).json({ message: 'Server error' })
   }
 })
