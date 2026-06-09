@@ -76,13 +76,11 @@ function Dashboard() {
   }
 
   const navLinks = [
-    { key: 'overview',  Icon: IconLayoutDashboard, label: 'Overview'  },
-    { key: 'my-games',  Icon: IconDeviceGamepad2,  label: 'My Games'  },
-    { key: 'discover',  Icon: IconZoom,            label: 'Discover'  },
-    { key: 'completed', Icon: IconTrophy,          label: 'Completed' },
-    { key: 'settings',  Icon: IconSettings,        label: 'Settings'  },
-  ]
-
+  { key: 'overview',  Icon: IconLayoutDashboard, label: 'Overview'  },
+  { key: 'my-games',  Icon: IconDeviceGamepad2,  label: 'My Games'  },
+  { key: 'discover',  Icon: IconZoom,            label: 'Discover'  },
+  { key: 'completed', Icon: IconTrophy,          label: 'Completed' },
+]
   const avatarEl = ce('div', {
     className: 'nav-avatar',
     onClick:   () => setShowSettings(true),
