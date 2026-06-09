@@ -13,20 +13,22 @@ const app = express()
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 app.use(cors())
-app.use(express.json())
+app.use(express.json({ limit: '2mb' })) // needed for base64 images
+app.use(express.urlencoded({ extended: true, limit: '2mb' }))
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err))
 
 const userSchema = new mongoose.Schema({
-  username:          { type: String },
-  email:             { type: String, required: true, unique: true },
-  password:          { type: String },
-  googleId:          { type: String },
-  resetToken:        { type: String },
-  resetTokenExpiry:  { type: Date },
-  createdAt:         { type: Date, default: Date.now }
+  username:         { type: String },
+  email:            { type: String, required: true, unique: true },
+  password:         { type: String },
+  googleId:         { type: String },
+  avatar:           { type: String },   // base64
+  resetToken:       { type: String },
+  resetTokenExpiry: { type: Date },
+  createdAt:        { type: Date, default: Date.now }
 })
 
 const User = mongoose.model('User', userSchema)
@@ -88,10 +90,14 @@ app.post('/auth/login', async (req, res) => {
 app.post('/auth/google', async (req, res) => {
   const { email, googleId, username } = req.body
   try {
-    const existingUser = await User.findOne({ email })
-    if (existingUser) return res.status(200).json({ message: 'Account already exists', user: existingUser })
-    const user = await User.create({ username, email, googleId })
-    res.status(201).json({ message: 'Account successfully created', user })
+    let user = await User.findOne({ email })
+    if (user) {
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' })
+      return res.status(200).json({ message: 'Login successful', token })
+    }
+    user = await User.create({ username, email, googleId })
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' })
+    res.status(201).json({ message: 'Account successfully created', token })
   } catch (err) {
     res.status(500).json({ message: 'Server error' })
   }
@@ -104,14 +110,11 @@ app.post('/auth/forgot-password', async (req, res) => {
     const user = await User.findOne({ email })
     if (!user) return res.status(404).json({ message: 'No account with that email' })
     if (!user.password) return res.status(400).json({ message: 'This account uses Google login' })
-
     const token = crypto.randomBytes(32).toString('hex')
     user.resetToken = token
     user.resetTokenExpiry = Date.now() + 1000 * 60 * 60
     await user.save()
-
     const resetLink = `${process.env.CLIENT_URL}/reset-password/${token}`
-
     await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: user.email,
@@ -123,7 +126,6 @@ app.post('/auth/forgot-password', async (req, res) => {
         <p>If you didn't request this, ignore this email.</p>
       `
     })
-
     res.json({ message: 'Reset link sent to your email' })
   } catch (err) {
     console.error(err)
@@ -158,9 +160,21 @@ app.post('/auth/reset-password', async (req, res) => {
 // Get current user
 app.get('/user/me', requireAuth, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select('username email')
+    const user = await User.findById(req.userId).select('username email avatar')
     if (!user) return res.status(404).json({ message: 'User not found' })
-    res.json({ username: user.username, email: user.email })
+    res.json({ username: user.username, email: user.email, avatar: user.avatar || null })
+  } catch {
+    res.status(500).json({ message: 'Server error' })
+  }
+})
+
+// Upload avatar
+app.post('/user/avatar', requireAuth, async (req, res) => {
+  const { avatar } = req.body
+  if (!avatar) return res.status(400).json({ message: 'No image provided' })
+  try {
+    await User.findByIdAndUpdate(req.userId, { avatar })
+    res.json({ message: 'Avatar updated' })
   } catch {
     res.status(500).json({ message: 'Server error' })
   }
@@ -225,7 +239,6 @@ app.delete('/user/delete', requireAuth, async (req, res) => {
   }
 })
 
-// Library routes (requireAuth applied here so the router doesn't need to import it)
 app.use('/library', requireAuth, libraryRoutes)
 
 app.get('/', (req, res) => res.send('Where Was I API running'))
