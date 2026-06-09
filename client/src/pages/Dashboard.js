@@ -5,6 +5,7 @@ import './Dashboard.css'
 import Overview from './Overview'
 import Discover from './Discover'
 import Settings from './Settings'
+import MyGames from './MyGames'   
 import { IconSettings, IconDeviceGamepad2, IconLayoutDashboard, IconZoom, IconTrophy } from '@tabler/icons-react'
 const ce = React.createElement
 function Dashboard() {
@@ -68,7 +69,7 @@ function Dashboard() {
     }, message),
     ce('div', { className: 'dashboard-content' },
       activePage === 'overview'  && ce(Overview),
-      activePage === 'my-games'  && ce('div', null, 'My Games page'),
+      activePage === 'my-games' && ce(MyGames),
       activePage === 'discover'  && ce(Discover),
       activePage === 'completed' && ce('div', null, 'Completed page'),
     ),
