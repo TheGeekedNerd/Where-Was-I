@@ -330,3 +330,97 @@
   .settings-header { padding: 1rem 1rem 0; }
   .settings-body { padding: 0.75rem 1rem 1.25rem; }
 }
+
+/* ── Avatar ── */
+.settings-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.settings-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.settings-avatar-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(0, 255, 137, 0.25);
+  display: block;
+}
+
+.settings-avatar-placeholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(0, 255, 137, 0.06);
+  border: 2px solid rgba(0, 255, 137, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 255, 137, 0.4);
+}
+
+.settings-avatar-camera {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #00ff89;
+  border: 2px solid #1a1a1a;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 10px;
+  transition: background 0.15s;
+}
+
+.settings-avatar-camera:hover { background: #00e07a; }
+.settings-avatar-camera:disabled { opacity: 0.5; cursor: not-allowed; }
+.settings-avatar-camera--loading { opacity: 0.6; }
+
+.settings-avatar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.settings-avatar-hint {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1.5;
+}
+
+/* ── Navbar avatar ── */
+.nav-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 255, 137, 0.06);
+  border: 1.5px solid rgba(0, 255, 137, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 255, 137, 0.5);
+  cursor: pointer;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: border-color 0.2s;
+  margin-left: auto;
+}
+
+.nav-avatar:hover { border-color: rgba(0, 255, 137, 0.5); }
+
+.nav-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
