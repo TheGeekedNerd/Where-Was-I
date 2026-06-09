@@ -1,0 +1,332 @@
+/* ── Overlay ── */
+.settings-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: settingsOverlayIn 0.2s ease;
+}
+
+@keyframes settingsOverlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Modal ── */
+.settings-modal {
+  background: #1a1a1a;
+  border: 1px solid rgba(0, 255, 137, 0.12);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 460px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: settingsModalIn 0.25s ease;
+}
+
+@keyframes settingsModalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Header ── */
+.settings-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.25rem 1.25rem 0;
+  flex-shrink: 0;
+}
+
+.settings-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.settings-subtitle {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 2px;
+}
+
+.settings-close {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.settings-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* ── Body ── */
+.settings-body {
+  overflow-y: auto;
+  padding: 1rem 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.settings-body::-webkit-scrollbar { width: 4px; }
+.settings-body::-webkit-scrollbar-track { background: transparent; }
+.settings-body::-webkit-scrollbar-thumb { background: rgba(0, 255, 137, 0.15); border-radius: 4px; }
+
+/* ── Section ── */
+.settings-section {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.settings-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.settings-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(0, 255, 137, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Field ── */
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.settings-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ── Input ── */
+.settings-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.settings-input-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.settings-input-icon {
+  position: absolute;
+  left: 10px;
+  color: rgba(0, 255, 137, 0.35);
+  pointer-events: none;
+}
+
+.settings-input {
+  width: 100%;
+  padding: 9px 12px 9px 32px;
+  background: rgba(0, 255, 137, 0.04);
+  border: 1px solid rgba(0, 255, 137, 0.15);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.settings-input::placeholder { color: rgba(255, 255, 255, 0.2); }
+.settings-input:focus { border-color: rgba(0, 255, 137, 0.4); }
+.settings-input:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.settings-input--danger {
+  padding-left: 12px;
+  border-color: rgba(231, 76, 60, 0.3);
+  background: rgba(231, 76, 60, 0.04);
+}
+.settings-input--danger:focus { border-color: rgba(231, 76, 60, 0.6); }
+.settings-input--danger::placeholder { color: rgba(231, 76, 60, 0.35); }
+
+/* ── Save (icon) button ── */
+.settings-save-btn {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  background: rgba(0, 255, 137, 0.1);
+  border: 1px solid rgba(0, 255, 137, 0.2);
+  border-radius: 8px;
+  color: #00ff89;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.15s;
+}
+
+.settings-save-btn:hover { background: rgba(0, 255, 137, 0.18); }
+.settings-save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.settings-save-btn--loading { opacity: 0.6; }
+
+/* ── Action button (full width) ── */
+.settings-action-btn {
+  padding: 9px 18px;
+  background: #00ff89;
+  border: none;
+  border-radius: 8px;
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.15s;
+}
+
+.settings-action-btn:hover { background: #00e07a; }
+.settings-action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.settings-action-btn--loading { opacity: 0.7; }
+
+/* ── Logout button ── */
+.settings-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 13px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.settings-logout-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Danger zone ── */
+.settings-danger-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  background: transparent;
+  border: 1px solid rgba(231, 76, 60, 0.25);
+  border-radius: 8px;
+  color: rgba(231, 76, 60, 0.7);
+  font-size: 13px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.15s, color 0.15s;
+}
+
+.settings-danger-toggle:hover {
+  background: rgba(231, 76, 60, 0.07);
+  color: #e74c3c;
+}
+
+.settings-delete-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.settings-delete-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  background: rgba(231, 76, 60, 0.07);
+  border: 1px solid rgba(231, 76, 60, 0.2);
+  border-radius: 8px;
+  color: rgba(231, 76, 60, 0.8);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.settings-delete-warning svg { flex-shrink: 0; margin-top: 1px; }
+.settings-delete-warning strong { color: #e74c3c; }
+
+.settings-delete-confirm-btn {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  background: rgba(231, 76, 60, 0.15);
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  border-radius: 8px;
+  color: #e74c3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.15s;
+}
+
+.settings-delete-confirm-btn:hover { background: rgba(231, 76, 60, 0.25); }
+.settings-delete-confirm-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.settings-delete-confirm-btn--loading { opacity: 0.6; }
+
+.settings-cancel-link {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  cursor: pointer;
+  align-self: flex-start;
+  padding: 0;
+  transition: color 0.15s;
+}
+.settings-cancel-link:hover { color: rgba(255, 255, 255, 0.6); }
+
+/* ── Status messages ── */
+.settings-status {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.settings-status--ok    { color: #00ff89; }
+.settings-status--error { color: #e74c3c; }
+
+/* ── Hint ── */
+.settings-hint {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.25);
+  font-style: italic;
+}
+
+/* ── Mobile ── */
+@media (max-width: 520px) {
+  .settings-modal { border-radius: 12px; max-height: 95vh; }
+  .settings-header { padding: 1rem 1rem 0; }
+  .settings-body { padding: 0.75rem 1rem 1.25rem; }
+}
