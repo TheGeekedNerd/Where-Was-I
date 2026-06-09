@@ -124,10 +124,6 @@ The client runs on `http://localhost:5173` and the server on `http://localhost:5
 
 ---
 
-## Author
-
-**Yuta** — [@TheGeekedNerd](https://github.com/TheGeekedNerd/where-was-i)
-
 ---
 
 ## License
