@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './Discover.css'
 import {
   IconSearch,
@@ -13,15 +13,20 @@ import {
 
 const ce = React.createElement
 const RAWG_KEY = import.meta.env.VITE_RAWG_API_KEY
+const API_URL  = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+
+function getToken() {
+  return localStorage.getItem('token')
+}
 
 const GENRES = [
-  { label: 'All',        slug: '',                    tag: ''           },
-  { label: 'Action',     slug: 'action',              tag: ''           },
-  { label: 'RPG',        slug: 'role-playing-games-rpg', tag: ''        },
-  { label: 'Adventure',  slug: 'adventure',           tag: ''           },
-  { label: 'Horror',     slug: '',                    tag: 'horror'     },
-  { label: 'Indie',      slug: 'indie',               tag: ''           },
-  { label: 'Open World', slug: '',                    tag: 'open-world' },
+  { label: 'All',        slug: '',                       tag: ''           },
+  { label: 'Action',     slug: 'action',                 tag: ''           },
+  { label: 'RPG',        slug: 'role-playing-games-rpg', tag: ''           },
+  { label: 'Adventure',  slug: 'adventure',              tag: ''           },
+  { label: 'Horror',     slug: '',                       tag: 'horror'     },
+  { label: 'Indie',      slug: 'indie',                  tag: ''           },
+  { label: 'Open World', slug: '',                       tag: 'open-world' },
 ]
 
 function useDebounce(value, delay) {
@@ -40,6 +45,7 @@ export default function Discover() {
   const [loading, setLoading]   = useState(false)
   const [selected, setSelected] = useState(null)
   const [added, setAdded]       = useState(new Set())
+  const [adding, setAdding]     = useState(false)
   const [page, setPage]         = useState(1)
   const [hasMore, setHasMore]   = useState(false)
 
@@ -64,20 +70,18 @@ export default function Discover() {
       setLoading(true)
       try {
         const params = new URLSearchParams({
-          key: RAWG_KEY,
+          key:      RAWG_KEY,
           page_size: 20,
           page,
           ordering: debouncedSearch ? '-relevance' : '-rating',
         })
-        if (debouncedSearch)  params.set('search', debouncedSearch)
-        if (genre.slug)       params.set('genres', genre.slug)
-        // Always filter to linear/story-driven games; genre tags append to this base
+        if (debouncedSearch) params.set('search',  debouncedSearch)
+        if (genre.slug)      params.set('genres',  genre.slug)
         params.set('tags', genre.tag ? `${genre.tag},story-rich,linear` : 'story-rich,linear')
 
         const res  = await fetch(`https://api.rawg.io/api/games?${params}`, { signal: abortRef.current.signal })
         const data = await res.json()
 
-        // Deduplicate across pages
         const fresh = (data.results || []).filter(g => {
           if (seenIds.current.has(g.id)) return false
           seenIds.current.add(g.id)
@@ -131,9 +135,37 @@ export default function Discover() {
 
   function closeModal() { setSelected(null) }
 
-  function addGame(id) {
-    setAdded(prev => new Set([...prev, id]))
-    closeModal()
+  async function addGame(game) {
+    if (added.has(game.id) || adding) return
+    setAdding(true)
+    try {
+      const res = await fetch(`${API_URL}/library`, {
+        method:  'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization:  `Bearer ${getToken()}`,
+        },
+        body: JSON.stringify({
+          rawgId:    game.id,
+          title:     game.title,
+          cover:     game.cover,
+          rating:    game.rating,
+          released:  game.released,
+          genres:    game.genres,
+          platforms: game.platforms,
+          playtime:  game.playtime,
+          slug:      game.slug,
+        }),
+      })
+      if (res.ok || res.status === 409) {
+        setAdded(prev => new Set([...prev, game.id]))
+      }
+    } catch (err) {
+      console.error('Failed to add game:', err)
+    } finally {
+      setAdding(false)
+      closeModal()
+    }
   }
 
   function handleGenreChange(g) {
@@ -169,12 +201,14 @@ export default function Discover() {
         ),
         ce('button', {
           className: `disc-modal-add ${added.has(selected.id) ? 'disc-modal-add--done' : ''}`,
-          onClick:   () => addGame(selected.id),
-          disabled:  added.has(selected.id),
+          onClick:   () => addGame(selected),
+          disabled:  added.has(selected.id) || adding,
         },
-          added.has(selected.id)
-            ? ce(React.Fragment, null, ce(IconCheck, { size: 16, stroke: 2 }), ' Added to library')
-            : ce(React.Fragment, null, ce(IconPlus,  { size: 16, stroke: 2 }), ' Add to library')
+          adding
+            ? ce(React.Fragment, null, ce(IconLoader2, { size: 16, stroke: 2, className: 'disc-spin' }), ' Adding...')
+            : added.has(selected.id)
+              ? ce(React.Fragment, null, ce(IconCheck, { size: 16, stroke: 2 }), ' Added to library')
+              : ce(React.Fragment, null, ce(IconPlus,  { size: 16, stroke: 2 }), ' Add to library')
         ),
       ),
     )

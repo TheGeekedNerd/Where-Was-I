@@ -16,19 +16,20 @@ function Dashboard() {
   const [showSettings, setShowSettings] = useState(false)
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
   useEffect(() => {
-    if (isAuthenticated && user && (user.sub.startsWith('google-oauth2') || user.sub.includes('discord'))) {
-      fetch(`${API_URL}/auth/google`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: user.email, googleId: user.sub, username: user.name })
+  if (isAuthenticated && user && (user.sub.startsWith('google-oauth2') || user.sub.includes('discord'))) {
+    fetch(`${API_URL}/auth/google`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: user.email, googleId: user.sub, username: user.name })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.token) localStorage.setItem('token', data.token)  // ← add this line
+        setMessage(data.message)
+        setTimeout(() => setMessage(''), 5000)
       })
-        .then(res => res.json())
-        .then(data => {
-          setMessage(data.message)
-          setTimeout(() => setMessage(''), 5000)
-        })
-    }
-  }, [isAuthenticated, user])
+  }
+}, [isAuthenticated, user])
   const navLinks = [
     { key: 'overview',  Icon: IconLayoutDashboard, label: 'Overview'  },
     { key: 'my-games',  Icon: IconDeviceGamepad2,  label: 'My Games'  },
