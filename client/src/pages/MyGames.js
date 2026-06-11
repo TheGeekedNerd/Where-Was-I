@@ -41,7 +41,8 @@ export default function MyGames() {
           headers: { Authorization: `Bearer ${getToken()}` }
         })
         const data = await res.json()
-        if (res.ok) setGames(data)
+        // Only keep playing + dropped games
+        if (res.ok) setGames(data.filter(g => g.status === 'playing' || g.status === 'dropped'))
       } catch (err) {
         console.error(err)
       } finally {
@@ -85,7 +86,14 @@ export default function MyGames() {
       })
       const data = await res.json()
       if (res.ok) {
-        setGames(prev => prev.map(g => g.rawgId === rawgId ? { ...g, status: data.status, playthroughs: data.playthroughs } : g))
+        if (status === 'completed') {
+          // Game moved to Completed — remove from this view
+          setGames(prev => prev.filter(g => g.rawgId !== rawgId))
+        } else {
+          setGames(prev => prev.map(g =>
+            g.rawgId === rawgId ? { ...g, status: data.status, playthroughs: data.playthroughs } : g
+          ))
+        }
       }
     } catch (err) {
       console.error(err)
@@ -94,14 +102,14 @@ export default function MyGames() {
     }
   }
 
-  const filtered = filter === 'all' ? games : games.filter(g => g.status === filter)
-
+  // Filter only between playing / dropped (no completed tab)
   const filterTabs = [
-    { key: 'all',       label: 'All'       },
-    { key: 'playing',   label: 'Playing'   },
-    { key: 'completed', label: 'Completed' },
-    { key: 'dropped',   label: 'Dropped'   },
+    { key: 'all',     label: 'All'     },
+    { key: 'playing', label: 'Playing' },
+    { key: 'dropped', label: 'Dropped' },
   ]
+
+  const filtered = filter === 'all' ? games : games.filter(g => g.status === filter)
 
   if (loading) return ce('div', { className: 'mg-loading' },
     ce(IconLoader2, { size: 28, stroke: 1.5, className: 'mg-spin' })
@@ -112,7 +120,7 @@ export default function MyGames() {
     ce('div', { className: 'mg-header' },
       ce('div', null,
         ce('h1', { className: 'mg-title' }, 'My Games'),
-        ce('p',  { className: 'mg-sub'   }, `${games.length} game${games.length !== 1 ? 's' : ''} in your library`)
+        ce('p',  { className: 'mg-sub'   }, `${games.length} game${games.length !== 1 ? 's' : ''} in progress`)
       ),
       ce('div', { className: 'mg-filters' },
         ...filterTabs.map(({ key, label }) =>
@@ -127,8 +135,8 @@ export default function MyGames() {
 
     filtered.length === 0 && ce('div', { className: 'mg-empty' },
       ce(IconDeviceGamepad2, { size: 40, stroke: 1 }),
-      ce('p',    null, filter === 'all' ? 'No games yet' : `No ${filter} games`),
-      ce('span', null, filter === 'all' ? 'Head to Discover to add your first game' : 'Change your filter or add more games')
+      ce('p',    null, filter === 'all' ? 'Nothing in progress' : `No ${filter} games`),
+      ce('span', null, filter === 'all' ? 'Head to Discover to add a game' : 'Change your filter or add more games')
     ),
 
     filtered.length > 0 && ce('div', { className: 'mg-grid' },
@@ -168,10 +176,10 @@ export default function MyGames() {
               game.released && ce('span', null, game.released)
             ),
 
-            // Playthroughs badge — only show if at least 1
-            game.playthroughs > 0 && ce('div', { className: 'mg-playthroughs' },
+            // Playthroughs — always visible
+            ce('div', { className: 'mg-playthroughs' },
               ce(IconRepeat, { size: 12, stroke: 1.5 }),
-              ` ${game.playthroughs} playthrough${game.playthroughs !== 1 ? 's' : ''}`
+              ` ${game.playthroughs || 0} playthrough${(game.playthroughs || 0) !== 1 ? 's' : ''}`
             ),
 
             ce('div', { className: 'mg-status-menu' },
