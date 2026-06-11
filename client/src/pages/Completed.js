@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './Completed.css'
+import GameDetailModal from './GameDetailModal'
 import {
   IconTrophy,
   IconLoader2,
@@ -22,11 +23,12 @@ const STATUS_LABELS  = { playing: 'Playing', completed: 'Completed', dropped: 'D
 const STATUS_OPTIONS = ['playing', 'completed', 'dropped']
 
 export default function Completed() {
-  const [games, setGames]       = useState([])
-  const [loading, setLoading]   = useState(true)
-  const [removing, setRemoving] = useState(null)
-  const [updating, setUpdating] = useState(null)
-  const [openMenu, setOpenMenu] = useState(null)
+  const [games, setGames]           = useState([])
+  const [loading, setLoading]       = useState(true)
+  const [removing, setRemoving]     = useState(null)
+  const [updating, setUpdating]     = useState(null)
+  const [openMenu, setOpenMenu]     = useState(null)
+  const [activeGame, setActiveGame] = useState(null)   // game open in modal
 
   useEffect(() => {
     async function fetchCompleted() {
@@ -80,7 +82,6 @@ export default function Completed() {
       })
       const data = await res.json()
       if (res.ok) {
-        // If moved out of completed, remove from this view
         if (status !== 'completed') {
           setGames(prev => prev.filter(g => g.rawgId !== rawgId))
         } else {
@@ -122,7 +123,12 @@ export default function Completed() {
 
     games.length > 0 && ce('div', { className: 'cp-grid' },
       ...games.map(game =>
-        ce('div', { key: game.rawgId, className: 'cp-card' },
+        ce('div', {
+          key:       game.rawgId,
+          className: 'cp-card',
+          onClick:   () => setActiveGame(game),
+          style:     { cursor: 'pointer' }
+        },
 
           ce('div', {
             className: 'cp-card-cover',
@@ -133,7 +139,6 @@ export default function Completed() {
             ),
             ce('div', { className: 'cp-card-cover-overlay' }),
 
-            // Playthroughs badge — always visible, top-left of cover
             ce('div', { className: 'cp-cover-badge' },
               ce(IconRepeat, { size: 11, stroke: 2 }),
               ` ${game.playthroughs || 0}x`
@@ -163,7 +168,6 @@ export default function Completed() {
               game.released && ce('span', null, game.released)
             ),
 
-            // Playthroughs — always visible in card body too
             ce('div', { className: 'cp-playthroughs' },
               ce(IconRepeat, { size: 12, stroke: 1.5 }),
               ` ${game.playthroughs || 0} playthrough${(game.playthroughs || 0) !== 1 ? 's' : ''}`
@@ -193,6 +197,13 @@ export default function Completed() {
           )
         )
       )
-    )
+    ),
+
+    // Modal — read-only on Completed (progress already done)
+    activeGame && ce(GameDetailModal, {
+      game:       activeGame,
+      isReadOnly: true,
+      onClose:    () => setActiveGame(null)
+    })
   )
 }
