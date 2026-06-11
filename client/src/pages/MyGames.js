@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './MyGames.css'
+import GameDetailModal from './GameDetailModal'
 import {
   IconDeviceGamepad2,
   IconStar,
@@ -26,12 +27,13 @@ const STATUS_LABELS = {
 const STATUS_OPTIONS = ['playing', 'completed', 'dropped']
 
 export default function MyGames() {
-  const [games, setGames]       = useState([])
-  const [loading, setLoading]   = useState(true)
-  const [removing, setRemoving] = useState(null)
-  const [updating, setUpdating] = useState(null)
-  const [openMenu, setOpenMenu] = useState(null)
-  const [filter, setFilter]     = useState('all')
+  const [games, setGames]           = useState([])
+  const [loading, setLoading]       = useState(true)
+  const [removing, setRemoving]     = useState(null)
+  const [updating, setUpdating]     = useState(null)
+  const [openMenu, setOpenMenu]     = useState(null)
+  const [filter, setFilter]         = useState('all')
+  const [activeGame, setActiveGame] = useState(null)   // game open in modal
 
   useEffect(() => {
     async function fetchLibrary() {
@@ -41,7 +43,6 @@ export default function MyGames() {
           headers: { Authorization: `Bearer ${getToken()}` }
         })
         const data = await res.json()
-        // Only keep playing + dropped games
         if (res.ok) setGames(data.filter(g => g.status === 'playing' || g.status === 'dropped'))
       } catch (err) {
         console.error(err)
@@ -87,7 +88,6 @@ export default function MyGames() {
       const data = await res.json()
       if (res.ok) {
         if (status === 'completed') {
-          // Game moved to Completed — remove from this view
           setGames(prev => prev.filter(g => g.rawgId !== rawgId))
         } else {
           setGames(prev => prev.map(g =>
@@ -102,7 +102,6 @@ export default function MyGames() {
     }
   }
 
-  // Filter only between playing / dropped (no completed tab)
   const filterTabs = [
     { key: 'all',     label: 'All'     },
     { key: 'playing', label: 'Playing' },
@@ -141,7 +140,12 @@ export default function MyGames() {
 
     filtered.length > 0 && ce('div', { className: 'mg-grid' },
       ...filtered.map(game =>
-        ce('div', { key: game.rawgId, className: 'mg-card' },
+        ce('div', {
+          key:       game.rawgId,
+          className: 'mg-card',
+          onClick:   () => setActiveGame(game),
+          style:     { cursor: 'pointer' }
+        },
 
           ce('div', {
             className: 'mg-card-cover',
@@ -176,7 +180,6 @@ export default function MyGames() {
               game.released && ce('span', null, game.released)
             ),
 
-            // Playthroughs — always visible
             ce('div', { className: 'mg-playthroughs' },
               ce(IconRepeat, { size: 12, stroke: 1.5 }),
               ` ${game.playthroughs || 0} playthrough${(game.playthroughs || 0) !== 1 ? 's' : ''}`
@@ -206,6 +209,13 @@ export default function MyGames() {
           )
         )
       )
-    )
+    ),
+
+    // Modal
+    activeGame && ce(GameDetailModal, {
+      game:       activeGame,
+      isReadOnly: false,
+      onClose:    () => setActiveGame(null)
+    })
   )
 }
