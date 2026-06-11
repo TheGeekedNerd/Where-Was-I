@@ -1,0 +1,295 @@
+.cp-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: cpFadeIn 0.4s ease;
+}
+
+@keyframes cpFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Header ── */
+.cp-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cp-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.cp-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 3px;
+}
+
+/* ── Grid ── */
+.cp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ── Card ── */
+.cp-card {
+  background: #1a1a1a;
+  border: 1px solid rgba(100, 160, 255, 0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.15s, background 0.2s;
+}
+
+.cp-card:hover {
+  border-color: rgba(100, 160, 255, 0.3);
+  transform: translateY(-3px);
+  background: #1e1e1e;
+}
+
+/* ── Cover ── */
+.cp-card-cover {
+  height: 175px;
+  background-size: cover;
+  background-position: center;
+  background-color: #222;
+  position: relative;
+}
+
+.cp-card-cover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(26, 26, 26, 0.6) 100%);
+}
+
+.cp-card-no-cover {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.12);
+}
+
+/* ── Cover badge (top-left, always visible) ── */
+.cp-cover-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffd166;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 209, 102, 0.3);
+  border-radius: 20px;
+  padding: 3px 8px;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Remove button ── */
+.cp-card-remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 7px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s, color 0.15s;
+}
+
+.cp-card:hover .cp-card-remove {
+  opacity: 1;
+}
+
+.cp-card-remove:hover {
+  background: rgba(231, 76, 60, 0.75);
+  border-color: transparent;
+  color: #fff;
+}
+
+.cp-card-remove:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ── Body ── */
+.cp-card-body {
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cp-card-genre {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(100, 160, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cp-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cp-card-meta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.cp-card-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* ── Playthroughs badge (card body) ── */
+.cp-playthroughs {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #ffd166;
+  background: rgba(255, 209, 102, 0.08);
+  border: 1px solid rgba(255, 209, 102, 0.2);
+  border-radius: 20px;
+  padding: 2px 8px;
+  width: fit-content;
+  margin-bottom: 4px;
+}
+
+/* ── Status dropdown ── */
+.cp-status-menu {
+  position: relative;
+  margin-top: 0.4rem;
+}
+
+.cp-status-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  background: rgba(100, 160, 255, 0.12);
+  border: 1px solid rgba(100, 160, 255, 0.3);
+  color: #64a0ff;
+  transition: opacity 0.15s;
+}
+
+.cp-status-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.cp-status-dropdown {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  background: #242424;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 50;
+  min-width: 130px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  animation: cpDropIn 0.15s ease;
+}
+
+@keyframes cpDropIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.cp-status-option {
+  display: block;
+  width: 100%;
+  padding: 9px 14px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.cp-status-option:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+/* ── Loading ── */
+.cp-loading {
+  display: flex;
+  justify-content: center;
+  padding: 4rem;
+  color: rgba(100, 160, 255, 0.5);
+}
+
+@keyframes cpSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.cp-spin { animation: cpSpin 0.8s linear infinite; }
+
+/* ── Empty ── */
+.cp-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 5rem 2rem;
+  color: rgba(100, 160, 255, 0.2);
+  text-align: center;
+}
+
+.cp-empty p    { font-size: 15px; font-weight: 600; color: rgba(255, 255, 255, 0.4); }
+.cp-empty span { font-size: 13px; color: rgba(255, 255, 255, 0.2); }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .cp-header  { flex-direction: column; }
+  .cp-grid    { grid-template-columns: repeat(2, 1fr); }
+  .cp-card-cover { height: 150px; }
+}
+
+@media (max-width: 480px) {
+  .cp-grid { grid-template-columns: 1fr; }
+}
