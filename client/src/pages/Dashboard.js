@@ -6,6 +6,7 @@ import Overview from './Overview'
 import Discover from './Discover'
 import Settings from './Settings'
 import MyGames from './MyGames'
+import Completed from './Completed'
 import {
   IconSettings,
   IconDeviceGamepad2,
@@ -76,11 +77,12 @@ function Dashboard() {
   }
 
   const navLinks = [
-  { key: 'overview',  Icon: IconLayoutDashboard, label: 'Overview'  },
-  { key: 'my-games',  Icon: IconDeviceGamepad2,  label: 'My Games'  },
-  { key: 'discover',  Icon: IconZoom,            label: 'Discover'  },
-  { key: 'completed', Icon: IconTrophy,          label: 'Completed' },
-]
+    { key: 'overview',  Icon: IconLayoutDashboard, label: 'Overview'  },
+    { key: 'my-games',  Icon: IconDeviceGamepad2,  label: 'My Games'  },
+    { key: 'discover',  Icon: IconZoom,            label: 'Discover'  },
+    { key: 'completed', Icon: IconTrophy,          label: 'Completed' },
+  ]
+
   const avatarEl = ce('div', {
     className: 'nav-avatar',
     onClick:   () => setShowSettings(true),
@@ -132,7 +134,7 @@ function Dashboard() {
       activePage === 'overview'  && ce(Overview),
       activePage === 'my-games'  && ce(MyGames),
       activePage === 'discover'  && ce(Discover),
-      activePage === 'completed' && ce('div', null, 'Completed page'),
+      activePage === 'completed' && ce(Completed),
     ),
 
     showSettings && ce(Settings, {
