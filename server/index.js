@@ -7,13 +7,14 @@ const { Resend } = require('resend')
 const crypto = require('crypto')
 require('dotenv').config()
 
-const libraryRoutes = require('./routes/Library')
+const libraryRoutes  = require('./routes/Library')
+const progressRoutes = require('./routes/progress')
 
 const app = express()
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 app.use(cors())
-app.use(express.json({ limit: '2mb' })) // needed for base64 images
+app.use(express.json({ limit: '2mb' }))
 app.use(express.urlencoded({ extended: true, limit: '2mb' }))
 
 mongoose.connect(process.env.MONGO_URI)
@@ -25,7 +26,7 @@ const userSchema = new mongoose.Schema({
   email:            { type: String, required: true, unique: true },
   password:         { type: String },
   googleId:         { type: String },
-  avatar:           { type: String },   // base64
+  avatar:           { type: String },
   resetToken:       { type: String },
   resetTokenExpiry: { type: Date },
   createdAt:        { type: Date, default: Date.now }
@@ -239,7 +240,9 @@ app.delete('/user/delete', requireAuth, async (req, res) => {
   }
 })
 
-app.use('/library', requireAuth, libraryRoutes)
+app.use('/library',   requireAuth, libraryRoutes)
+app.use('/progress',  requireAuth, progressRoutes)
+app.use('/structure', requireAuth, progressRoutes)
 
 app.get('/', (req, res) => res.send('Where Was I API running'))
 app.listen(5000, () => console.log('Server running on port 5000'))
