@@ -89,7 +89,7 @@ structureRouter.get('/:rawgId', async (req, res) => {
   const rawgId = Number(req.params.rawgId)
 
   try {
-    const structure = await GameStructure.findOne({ rawgId })
+    const structure = await GameStructure.findOne({ rawgId }).lean()
     if (!structure) {
       return res.status(404).json({ message: 'No story structure available for this game' })
     }
