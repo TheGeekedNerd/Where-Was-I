@@ -8,7 +8,7 @@ const crypto = require('crypto')
 require('dotenv').config()
 
 const libraryRoutes  = require('./routes/Library')
-const progressRoutes = require('./routes/progress')
+const { progressRouter, structureRouter } = require('./routes/progress')
 
 const app = express()
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -241,8 +241,8 @@ app.delete('/user/delete', requireAuth, async (req, res) => {
 })
 
 app.use('/library',   requireAuth, libraryRoutes)
-app.use('/progress',  requireAuth, progressRoutes)
-app.use('/structure', requireAuth, progressRoutes)
+app.use('/progress',  requireAuth, progressRouter)
+app.use('/structure', requireAuth, structureRouter)
 
 app.get('/', (req, res) => res.send('Where Was I API running'))
 app.listen(5000, () => console.log('Server running on port 5000'))

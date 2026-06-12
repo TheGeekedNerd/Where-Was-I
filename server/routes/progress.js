@@ -11,7 +11,8 @@
  */
 
 const express         = require('express')
-const router          = express.Router()
+const progressRouter  = express.Router()
+const structureRouter = express.Router()
 const GameStructure   = require('../models/GameStructure')
 const UserGameProgress = require('../models/UserGameProgress')
 
@@ -42,8 +43,9 @@ function resolveCurrent(allMissionIds, completedSet) {
  *  - Acts where all missions are locked → act title is also hidden
  */
 function buildGatedStructure(acts, completedSet, currentMissionId) {
-  let reachedCurrent = false
-  let pastCurrent    = false
+  // Once true, every mission from here on (including the rest of the
+  // current act and all subsequent acts) is locked.
+  let pastCurrent = false
 
   return acts.map(act => {
     const gatedMissions = act.missions.map(mission => {
@@ -53,8 +55,8 @@ function buildGatedStructure(acts, completedSet, currentMissionId) {
       }
 
       if (mission.id === currentMissionId) {
-        reachedCurrent = true
-        pastCurrent    = false  // current is visible; lock starts AFTER this
+        // Current is visible; locking begins with the *next* mission
+        pastCurrent = true
         return { ...mission, current: true, locked: false }
       }
 
@@ -62,20 +64,9 @@ function buildGatedStructure(acts, completedSet, currentMissionId) {
         return { ...mission, completed: true, locked: false }
       }
 
-      // This handles the edge case where currentMissionId is null (all done)
-      // and we fall through — nothing should be locked in that case
+      // Edge case: currentMissionId is null (all done) — nothing locked
       return { ...mission, locked: false }
     })
-
-    // After processing each mission, set pastCurrent for the next iteration
-    // We need to do this outside the map since map doesn't share state cleanly
-    // Re-derive: pastCurrent should be true after we've seen currentMissionId
-    const currentIndex = act.missions.findIndex(m => m.id === currentMissionId)
-    if (currentIndex !== -1) {
-      // current mission is in this act — everything after it in this act is locked
-      // and all subsequent acts are locked
-      pastCurrent = true
-    }
 
     // Determine if the entire act is locked (all its missions are locked)
     const allLocked = gatedMissions.every(m => m.locked)
@@ -94,7 +85,7 @@ function buildGatedStructure(acts, completedSet, currentMissionId) {
 // Returns the spoiler-gated chapter/mission tree for a game.
 // Future missions are returned as { locked: true, title: null }.
 
-router.get('/structure/:rawgId', async (req, res) => {
+structureRouter.get('/:rawgId', async (req, res) => {
   const rawgId = Number(req.params.rawgId)
 
   try {
@@ -130,7 +121,7 @@ router.get('/structure/:rawgId', async (req, res) => {
 // ── GET /progress/:rawgId ─────────────────────────────────────────────────────
 // Returns raw progress data for a game (completed mission ids, current mission).
 
-router.get('/:rawgId', async (req, res) => {
+progressRouter.get('/:rawgId', async (req, res) => {
   const rawgId = Number(req.params.rawgId)
 
   try {
@@ -163,7 +154,7 @@ router.get('/:rawgId', async (req, res) => {
 // Marks a mission as completed and advances currentMissionId to the next one.
 // Body: { missionId: String }
 
-router.post('/:rawgId/complete', async (req, res) => {
+progressRouter.post('/:rawgId/complete', async (req, res) => {
   const rawgId    = Number(req.params.rawgId)
   const { missionId } = req.body
 
@@ -224,7 +215,7 @@ router.post('/:rawgId/complete', async (req, res) => {
 // ── DELETE /progress/:rawgId/reset ───────────────────────────────────────────
 // Wipes all progress for a game — back to mission 1.
 
-router.delete('/:rawgId/reset', async (req, res) => {
+progressRouter.delete('/:rawgId/reset', async (req, res) => {
   const rawgId = Number(req.params.rawgId)
 
   try {
@@ -236,4 +227,4 @@ router.delete('/:rawgId/reset', async (req, res) => {
   }
 })
 
-module.exports = router
+module.exports = { progressRouter, structureRouter }
