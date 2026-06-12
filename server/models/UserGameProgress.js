@@ -11,9 +11,9 @@ const userGameProgressSchema = new mongoose.Schema({
 userGameProgressSchema.index({ userId: 1, rawgId: 1 }, { unique: true })
 
 // Always update updatedAt on save
-userGameProgressSchema.pre('save', function (next) {
+// Mongoose 7+ removed the next() callback for pre hooks — just don't call it.
+userGameProgressSchema.pre('save', function () {
   this.updatedAt = new Date()
-  next()
 })
 
 module.exports = mongoose.model('UserGameProgress', userGameProgressSchema)
