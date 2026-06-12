@@ -280,9 +280,8 @@
   gap: 8px;
 }
 
-.gdm-act-chevron { color: rgba(255, 255, 255, 0.3); flex-shrink: 0; }
-
-.gdm-act-lock-icon { color: rgba(255, 255, 255, 0.2); flex-shrink: 0; }
+.gdm-act-chevron    { color: rgba(255, 255, 255, 0.3); flex-shrink: 0; }
+.gdm-act-lock-icon  { color: rgba(255, 255, 255, 0.2); flex-shrink: 0; }
 
 .gdm-act-title {
   font-size: 13px;
@@ -296,12 +295,7 @@
   user-select: none;
 }
 
-.gdm-act-count {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.25);
-  flex-shrink: 0;
-}
-
+.gdm-act-count     { font-size: 11px; color: rgba(255, 255, 255, 0.25); flex-shrink: 0; }
 .gdm-act-done-icon { color: rgba(0, 255, 137, 0.6); }
 
 /* ── Missions ── */
@@ -319,9 +313,7 @@
 }
 
 /* Completed */
-.gdm-mission--completed {
-  opacity: 0.55;
-}
+.gdm-mission--completed { opacity: 0.55; }
 
 .gdm-mission-check {
   width: 18px;
@@ -339,6 +331,7 @@
 /* Current */
 .gdm-mission--current {
   background: rgba(0, 255, 137, 0.04);
+  align-items: flex-start;
 }
 
 .gdm-mission-dot {
@@ -351,6 +344,7 @@
   justify-content: center;
   flex-shrink: 0;
   position: relative;
+  margin-top: 1px;
 }
 
 .gdm-mission-dot::after {
@@ -361,10 +355,24 @@
   background: #00ff89;
 }
 
-/* Locked */
-.gdm-mission--locked {
-  opacity: 0.5;
+.gdm-mission-current-left { padding-top: 2px; flex-shrink: 0; }
+
+.gdm-mission-current-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
+
+.gdm-mission-current-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Locked */
+.gdm-mission--locked { opacity: 0.5; }
 
 .gdm-mission-lock-icon {
   width: 18px;
@@ -376,9 +384,7 @@
   flex-shrink: 0;
 }
 
-/* Upcoming (unlocked but not yet current) */
-.gdm-mission--upcoming {}
-
+/* Upcoming */
 .gdm-mission-upcoming-dot {
   width: 18px;
   height: 18px;
@@ -399,6 +405,19 @@
   color: transparent;
   text-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
   user-select: none;
+}
+
+/* Description teaser — current mission only */
+.gdm-mission-description {
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+  margin: 0;
+  padding: 6px 10px;
+  background: rgba(0, 255, 137, 0.03);
+  border-left: 2px solid rgba(0, 255, 137, 0.2);
+  border-radius: 0 6px 6px 0;
 }
 
 /* Done button */
@@ -473,7 +492,7 @@
 
 /* ── Responsive ── */
 @media (max-width: 560px) {
-  .gdm-modal     { max-height: 95vh; border-radius: 14px; }
-  .gdm-cover     { height: 130px; }
+  .gdm-modal       { max-height: 95vh; border-radius: 14px; }
+  .gdm-cover       { height: 130px; }
   .gdm-cover-title { font-size: 17px; }
 }
