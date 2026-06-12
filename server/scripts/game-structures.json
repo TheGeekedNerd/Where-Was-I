@@ -1,0 +1,2151 @@
+[
+  {
+    "rawgId": 28,
+    "title": "Red Dead Redemption 2",
+    "source": "manual",
+    "sourceUrl": "https://www.powerpyx.com/red-dead-redemption-2-full-walkthrough-all-story-missions/",
+    "acts": [
+      {
+        "id": "chapter-1",
+        "title": "Chapter 1: Colter",
+        "order": 0,
+        "missions": [
+          {
+            "id": "chapter-1--outlaws-from-the-west",
+            "title": "Outlaws from the West",
+            "order": 0
+          },
+          {
+            "id": "chapter-1--enter-pursued-by-a-memory",
+            "title": "Enter, Pursued by a Memory",
+            "order": 1
+          },
+          {
+            "id": "chapter-1--the-aftermath-of-genesis",
+            "title": "The Aftermath of Genesis",
+            "order": 2
+          },
+          {
+            "id": "chapter-1--old-friends",
+            "title": "Old Friends",
+            "order": 3
+          },
+          {
+            "id": "chapter-1--who-the-hell-is-leviticus-cornwall",
+            "title": "Who the Hell is Leviticus Cornwall?",
+            "order": 4
+          },
+          {
+            "id": "chapter-1--eastward-bound",
+            "title": "Eastward Bound",
+            "order": 5
+          }
+        ]
+      },
+      {
+        "id": "chapter-2",
+        "title": "Chapter 2: Horseshoe Overlook",
+        "order": 1,
+        "missions": [
+          {
+            "id": "chapter-2--polite-society-valentine-style",
+            "title": "Polite Society, Valentine Style",
+            "order": 0
+          },
+          {
+            "id": "chapter-2--americans-at-rest",
+            "title": "Americans at Rest",
+            "order": 1
+          },
+          {
+            "id": "chapter-2--exit-pursued-by-a-bruised-ego",
+            "title": "Exit Pursued by a Bruised Ego",
+            "order": 2
+          },
+          {
+            "id": "chapter-2--paying-a-social-call",
+            "title": "Paying a Social Call",
+            "order": 3
+          },
+          {
+            "id": "chapter-2--a-quiet-time",
+            "title": "A Quiet Time",
+            "order": 4
+          },
+          {
+            "id": "chapter-2--who-is-not-without-sin",
+            "title": "Who is Not without Sin",
+            "order": 5
+          },
+          {
+            "id": "chapter-2--the-spines-of-america",
+            "title": "The Spines of America",
+            "order": 6
+          },
+          {
+            "id": "chapter-2--money-lending-and-other-sins-i-ii-iii",
+            "title": "Money Lending and Other Sins I, II, III",
+            "order": 7
+          },
+          {
+            "id": "chapter-2--blessed-are-the-meek",
+            "title": "Blessed are the Meek?",
+            "order": 8
+          },
+          {
+            "id": "chapter-2--the-first-shall-be-last",
+            "title": "The First Shall Be Last",
+            "order": 9
+          },
+          {
+            "id": "chapter-2--pouring-forth-oil-ii",
+            "title": "Pouring Forth Oil II",
+            "order": 10
+          },
+          {
+            "id": "chapter-2--a-fisher-of-men",
+            "title": "A Fisher of Men",
+            "order": 11
+          },
+          {
+            "id": "chapter-2--pouring-forth-oil-iv",
+            "title": "Pouring Forth Oil IV",
+            "order": 12
+          },
+          {
+            "id": "chapter-2--we-loved-once-and-true-iii",
+            "title": "We Loved Once and True III",
+            "order": 13
+          },
+          {
+            "id": "chapter-2--good-honest-snake-oil",
+            "title": "Good, Honest, Snake Oil",
+            "order": 14
+          },
+          {
+            "id": "chapter-2--the-sheep-and-the-goats",
+            "title": "The Sheep and the Goats",
+            "order": 15
+          },
+          {
+            "id": "chapter-2--an-american-pastoral-scene",
+            "title": "An American Pastoral Scene",
+            "order": 16
+          },
+          {
+            "id": "chapter-2--a-strange-kindness",
+            "title": "A Strange Kindness",
+            "order": 17
+          }
+        ]
+      },
+      {
+        "id": "chapter-3",
+        "title": "Chapter 3: Clemens Point",
+        "order": 2,
+        "missions": [
+          {
+            "id": "chapter-3--further-questions-of-female-suffrage",
+            "title": "Further Questions of Female Suffrage",
+            "order": 0
+          },
+          {
+            "id": "chapter-3--the-new-south",
+            "title": "The New South",
+            "order": 1
+          },
+          {
+            "id": "chapter-3--american-distillation",
+            "title": "American Distillation",
+            "order": 2
+          },
+          {
+            "id": "chapter-3--the-course-of-true-love-ii",
+            "title": "The Course of True Love II",
+            "order": 3
+          },
+          {
+            "id": "chapter-3--the-course-of-true-love-iii",
+            "title": "The Course of True Love III",
+            "order": 4
+          },
+          {
+            "id": "chapter-3--an-honest-mistake",
+            "title": "An Honest Mistake",
+            "order": 5
+          },
+          {
+            "id": "chapter-3--money-lending-and-other-sins-iv",
+            "title": "Money Lending and Other Sins IV",
+            "order": 6
+          },
+          {
+            "id": "chapter-3--preaching-forgiveness-as-he-went",
+            "title": "Preaching Forgiveness as He Went",
+            "order": 7
+          },
+          {
+            "id": "chapter-3--sodom-back-to-gomorrah",
+            "title": "Sodom? Back to Gomorrah",
+            "order": 8
+          },
+          {
+            "id": "chapter-3--advertising-the-new-american-art-ii",
+            "title": "Advertising, the New American Art II",
+            "order": 9
+          },
+          {
+            "id": "chapter-3--magicians-for-sport",
+            "title": "Magicians for Sport",
+            "order": 10
+          },
+          {
+            "id": "chapter-3--horse-flesh-for-dinner",
+            "title": "Horse Flesh for Dinner",
+            "order": 11
+          },
+          {
+            "id": "chapter-3--friends-in-very-low-places",
+            "title": "Friends in Very Low Places",
+            "order": 12
+          },
+          {
+            "id": "chapter-3--the-fine-joys-of-tobacco",
+            "title": "The Fine Joys of Tobacco",
+            "order": 13
+          },
+          {
+            "id": "chapter-3--blessed-are-the-peacemakers",
+            "title": "Blessed are the Peacemakers",
+            "order": 14
+          },
+          {
+            "id": "chapter-3--a-short-walk-in-a-pretty-town",
+            "title": "A Short Walk in a Pretty Town",
+            "order": 15
+          },
+          {
+            "id": "chapter-3--blood-feuds-ancient-and-modern",
+            "title": "Blood Feuds, Ancient and Modern",
+            "order": 16
+          },
+          {
+            "id": "chapter-3--the-battle-of-shady-belle",
+            "title": "The Battle of Shady Belle",
+            "order": 17
+          }
+        ]
+      },
+      {
+        "id": "chapter-4",
+        "title": "Chapter 4: Saint Denis",
+        "order": 3,
+        "missions": [
+          {
+            "id": "chapter-4--the-joys-of-civilization",
+            "title": "The Joys of Civilization",
+            "order": 0
+          },
+          {
+            "id": "chapter-4--angelo-bronte-a-man-of-honor",
+            "title": "Angelo Bronte, a Man of Honor",
+            "order": 1
+          },
+          {
+            "id": "chapter-4--help-a-brother-out",
+            "title": "Help a Brother Out",
+            "order": 2
+          },
+          {
+            "id": "chapter-4--brothers-and-sisters-one-and-all",
+            "title": "Brothers and Sisters, One and All",
+            "order": 3
+          },
+          {
+            "id": "chapter-4--fatherhood-and-other-dreams-i-ii",
+            "title": "Fatherhood and Other Dreams I, II",
+            "order": 4
+          },
+          {
+            "id": "chapter-4--money-lending-and-other-sins-v",
+            "title": "Money Lending and Other Sins V",
+            "order": 5
+          },
+          {
+            "id": "chapter-4--a-fine-night-of-debauchery",
+            "title": "A Fine Night of Debauchery",
+            "order": 6
+          },
+          {
+            "id": "chapter-4--the-gilded-cage",
+            "title": "The Gilded Cage",
+            "order": 7
+          },
+          {
+            "id": "chapter-4--urban-pleasures",
+            "title": "Urban Pleasures",
+            "order": 8
+          },
+          {
+            "id": "chapter-4--country-pursuits",
+            "title": "Country Pursuits",
+            "order": 9
+          },
+          {
+            "id": "chapter-4--revenge-is-a-dish-best-eaten",
+            "title": "Revenge is a Dish Best Eaten",
+            "order": 10
+          },
+          {
+            "id": "chapter-4--banking-the-old-american-art",
+            "title": "Banking, the Old American Art",
+            "order": 11
+          }
+        ]
+      },
+      {
+        "id": "chapter-5",
+        "title": "Chapter 5: Guarma",
+        "order": 4,
+        "missions": [
+          {
+            "id": "chapter-5--welcome-to-the-new-world",
+            "title": "Welcome to the New World",
+            "order": 0
+          },
+          {
+            "id": "chapter-5--a-kind-and-benevolent-despot",
+            "title": "A Kind and Benevolent Despot",
+            "order": 1
+          },
+          {
+            "id": "chapter-5--hell-hath-no-fury",
+            "title": "Hell Hath No Fury",
+            "order": 2
+          },
+          {
+            "id": "chapter-5--a-fork-in-the-road",
+            "title": "A Fork in the Road",
+            "order": 3
+          },
+          {
+            "id": "chapter-5--fleeting-joy",
+            "title": "Fleeting Joy",
+            "order": 4
+          },
+          {
+            "id": "chapter-5--paradise-mercifully-departed",
+            "title": "Paradise Mercifully Departed",
+            "order": 5
+          },
+          {
+            "id": "chapter-5--mrs-sadie-adler-widow-i-ii",
+            "title": "Mrs. Sadie Adler, Widow I, II",
+            "order": 6
+          }
+        ]
+      },
+      {
+        "id": "chapter-6",
+        "title": "Chapter 6: Beaver Hollow",
+        "order": 5,
+        "missions": [
+          {
+            "id": "chapter-6--just-a-social-call",
+            "title": "Just a Social Call",
+            "order": 0
+          },
+          {
+            "id": "chapter-6--a-rage-unleashed",
+            "title": "A Rage Unleashed",
+            "order": 1
+          },
+          {
+            "id": "chapter-6--during-the-day-of-jubilee",
+            "title": "During the Day of Jubilee",
+            "order": 2
+          },
+          {
+            "id": "chapter-6--the-course-of-true-love-iv-v",
+            "title": "The Course of True Love IV, V",
+            "order": 3
+          },
+          {
+            "id": "chapter-6--do-not-seek-absolution-i-ii",
+            "title": "Do Not Seek Absolution I, II",
+            "order": 4
+          },
+          {
+            "id": "chapter-6--of-men-and-angels-i-ii",
+            "title": "Of Men and Angels I, II",
+            "order": 5
+          },
+          {
+            "id": "chapter-6--archaeology-for-beginners",
+            "title": "Archaeology for Beginners",
+            "order": 6
+          },
+          {
+            "id": "chapter-6--honor-amongst-thieves",
+            "title": "Honor, Amongst Thieves",
+            "order": 7
+          },
+          {
+            "id": "chapter-6--money-lending-and-other-sins-vi-vii",
+            "title": "Money Lending and Other Sins VI, VII",
+            "order": 8
+          },
+          {
+            "id": "chapter-6--my-last-boy",
+            "title": "My Last Boy",
+            "order": 9
+          },
+          {
+            "id": "chapter-6--our-best-selves",
+            "title": "Our Best Selves",
+            "order": 10
+          },
+          {
+            "id": "chapter-6--red-dead-redemption",
+            "title": "Red Dead Redemption",
+            "order": 11
+          }
+        ]
+      },
+      {
+        "id": "epilogue-1",
+        "title": "Epilogue Part 1: Pronghorn Ranch",
+        "order": 6,
+        "missions": [
+          {
+            "id": "epilogue-1--the-wheel",
+            "title": "The Wheel",
+            "order": 0
+          },
+          {
+            "id": "epilogue-1--simple-pleasures",
+            "title": "Simple Pleasures",
+            "order": 1
+          },
+          {
+            "id": "epilogue-1--farming-for-beginners",
+            "title": "Farming, for Beginners",
+            "order": 2
+          },
+          {
+            "id": "epilogue-1--fatherhood-for-beginners",
+            "title": "Fatherhood, for Beginners",
+            "order": 3
+          },
+          {
+            "id": "epilogue-1--old-habits",
+            "title": "Old Habits",
+            "order": 4
+          },
+          {
+            "id": "epilogue-1--home-improvement-for-beginners",
+            "title": "Home Improvement for Beginners",
+            "order": 5
+          },
+          {
+            "id": "epilogue-1--advertising-the-new-american-art-iii",
+            "title": "Advertising, the New American Art III",
+            "order": 6
+          },
+          {
+            "id": "epilogue-1--fatherhood-and-other-dreams-iii-iv",
+            "title": "Fatherhood and Other Dreams III, IV",
+            "order": 7
+          }
+        ]
+      },
+      {
+        "id": "epilogue-2",
+        "title": "Epilogue Part 2: Beechers Hope",
+        "order": 7,
+        "missions": [
+          {
+            "id": "epilogue-2--gainful-employment",
+            "title": "Gainful Employment",
+            "order": 0
+          },
+          {
+            "id": "epilogue-2--american-venom",
+            "title": "American Venom",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "rawgId": 3498,
+    "title": "God of War",
+    "source": "manual",
+    "sourceUrl": "https://www.powerpyx.com/god-of-war-2018-full-walkthrough-all-story-missions/",
+    "acts": [
+      {
+        "id": "the-marked-trees",
+        "title": "The Marked Trees",
+        "order": 0,
+        "missions": [
+          {
+            "id": "the-marked-trees--prologue",
+            "title": "Prologue",
+            "order": 0
+          },
+          {
+            "id": "the-marked-trees--the-marked-trees",
+            "title": "The Marked Trees",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "path-to-the-mountain",
+        "title": "Path to the Mountain",
+        "order": 1,
+        "missions": [
+          {
+            "id": "path-to-the-mountain--path-to-the-mountain",
+            "title": "Path to the Mountain",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "a-realm-beyond",
+        "title": "A Realm Beyond",
+        "order": 2,
+        "missions": [
+          {
+            "id": "a-realm-beyond--a-realm-beyond",
+            "title": "A Realm Beyond",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-light-of-alfheim",
+        "title": "The Light of Alfheim",
+        "order": 3,
+        "missions": [
+          {
+            "id": "the-light-of-alfheim--the-light-of-alfheim",
+            "title": "The Light of Alfheim",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "inside-the-mountain",
+        "title": "Inside the Mountain",
+        "order": 4,
+        "missions": [
+          {
+            "id": "inside-the-mountain--inside-the-mountain",
+            "title": "Inside the Mountain",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "a-new-destination",
+        "title": "A New Destination",
+        "order": 5,
+        "missions": [
+          {
+            "id": "a-new-destination--a-new-destination",
+            "title": "A New Destination",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-magic-chisel",
+        "title": "The Magic Chisel",
+        "order": 6,
+        "missions": [
+          {
+            "id": "the-magic-chisel--the-magic-chisel",
+            "title": "The Magic Chisel",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "behind-the-lock",
+        "title": "Behind the Lock",
+        "order": 7,
+        "missions": [
+          {
+            "id": "behind-the-lock--behind-the-lock",
+            "title": "Behind the Lock",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-sickness",
+        "title": "The Sickness",
+        "order": 8,
+        "missions": [
+          {
+            "id": "the-sickness--the-sickness",
+            "title": "The Sickness",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-black-rune",
+        "title": "The Black Rune",
+        "order": 9,
+        "missions": [
+          {
+            "id": "the-black-rune--the-black-rune",
+            "title": "The Black Rune",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "return-to-the-summit",
+        "title": "Return to the Summit",
+        "order": 10,
+        "missions": [
+          {
+            "id": "return-to-the-summit--return-to-the-summit",
+            "title": "Return to the Summit",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "between-the-realms",
+        "title": "Between the Realms",
+        "order": 11,
+        "missions": [
+          {
+            "id": "between-the-realms--between-the-realms",
+            "title": "Between the Realms",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "jotunheim-in-reach",
+        "title": "Jotunheim in Reach",
+        "order": 12,
+        "missions": [
+          {
+            "id": "jotunheim-in-reach--jotunheim-in-reach",
+            "title": "Jotunheim in Reach",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-summit",
+        "title": "The Summit",
+        "order": 13,
+        "missions": [
+          {
+            "id": "the-summit--the-summit",
+            "title": "The Summit",
+            "order": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "rawgId": 257,
+    "title": "The Last of Us",
+    "source": "manual",
+    "sourceUrl": "https://www.powerpyx.com/the-last-of-us-walkthrough/",
+    "acts": [
+      {
+        "id": "prologue",
+        "title": "Prologue",
+        "order": 0,
+        "missions": [
+          {
+            "id": "prologue--prologue",
+            "title": "Prologue",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "boston-quarantine-zone",
+        "title": "Boston Quarantine Zone",
+        "order": 1,
+        "missions": [
+          {
+            "id": "boston-quarantine-zone--the-outskirts",
+            "title": "The Outskirts",
+            "order": 0
+          },
+          {
+            "id": "boston-quarantine-zone--the-slums",
+            "title": "The Slums",
+            "order": 1
+          },
+          {
+            "id": "boston-quarantine-zone--the-cargo",
+            "title": "The Cargo",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "the-outskirts",
+        "title": "The Outskirts",
+        "order": 2,
+        "missions": [
+          {
+            "id": "the-outskirts--outside-boston",
+            "title": "Outside Boston",
+            "order": 0
+          },
+          {
+            "id": "the-outskirts--the-suburbs",
+            "title": "The Suburbs",
+            "order": 1
+          },
+          {
+            "id": "the-outskirts--the-woods",
+            "title": "The Woods",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "bill-s-town",
+        "title": "Bill's Town",
+        "order": 3,
+        "missions": [
+          {
+            "id": "bill-s-town--alone-and-forsaken",
+            "title": "Alone and Forsaken",
+            "order": 0
+          },
+          {
+            "id": "bill-s-town--safehouse",
+            "title": "Safehouse",
+            "order": 1
+          },
+          {
+            "id": "bill-s-town--the-car",
+            "title": "The Car",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "pittsburgh",
+        "title": "Pittsburgh",
+        "order": 4,
+        "missions": [
+          {
+            "id": "pittsburgh--alone-and-forsaken",
+            "title": "Alone and Forsaken",
+            "order": 0
+          },
+          {
+            "id": "pittsburgh--hotel-lobby",
+            "title": "Hotel Lobby",
+            "order": 1
+          },
+          {
+            "id": "pittsburgh--financial-district",
+            "title": "Financial District",
+            "order": 2
+          },
+          {
+            "id": "pittsburgh--escape-the-city",
+            "title": "Escape the City",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "the-suburbs",
+        "title": "The Suburbs",
+        "order": 5,
+        "missions": [
+          {
+            "id": "the-suburbs--lakeside-hotel",
+            "title": "Lakeside Hotel",
+            "order": 0
+          },
+          {
+            "id": "the-suburbs--ranch-house",
+            "title": "Ranch House",
+            "order": 1
+          },
+          {
+            "id": "the-suburbs--suburbs",
+            "title": "Suburbs",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "tommy-s-dam",
+        "title": "Tommy's Dam",
+        "order": 6,
+        "missions": [
+          {
+            "id": "tommy-s-dam--the-dam",
+            "title": "The Dam",
+            "order": 0
+          },
+          {
+            "id": "tommy-s-dam--hydroelectric-dam",
+            "title": "Hydroelectric Dam",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "the-university",
+        "title": "The University",
+        "order": 7,
+        "missions": [
+          {
+            "id": "the-university--college-campus",
+            "title": "College Campus",
+            "order": 0
+          },
+          {
+            "id": "the-university--science-building",
+            "title": "Science Building",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "lakeside-resort",
+        "title": "Lakeside Resort",
+        "order": 8,
+        "missions": [
+          {
+            "id": "lakeside-resort--cabin-resort",
+            "title": "Cabin Resort",
+            "order": 0
+          },
+          {
+            "id": "lakeside-resort--the-woods",
+            "title": "The Woods",
+            "order": 1
+          },
+          {
+            "id": "lakeside-resort--lakeside-resort",
+            "title": "Lakeside Resort",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "bus-depot",
+        "title": "Bus Depot",
+        "order": 9,
+        "missions": [
+          {
+            "id": "bus-depot--bus-depot",
+            "title": "Bus Depot",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-firefly-lab",
+        "title": "The Firefly Lab",
+        "order": 10,
+        "missions": [
+          {
+            "id": "the-firefly-lab--salt-lake-city",
+            "title": "Salt Lake City",
+            "order": 0
+          },
+          {
+            "id": "the-firefly-lab--st-marys-hospital",
+            "title": "St. Mary's Hospital",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "jackson",
+        "title": "Jackson",
+        "order": 11,
+        "missions": [
+          {
+            "id": "jackson--epilogue",
+            "title": "Epilogue",
+            "order": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "rawgId": 799265,
+    "title": "The Last of Us Part I",
+    "source": "manual",
+    "sourceUrl": "https://www.powerpyx.com/the-last-of-us-walkthrough/",
+    "acts": [
+      {
+        "id": "prologue",
+        "title": "Prologue",
+        "order": 0,
+        "missions": [
+          {
+            "id": "prologue--prologue",
+            "title": "Prologue",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "boston-quarantine-zone",
+        "title": "Boston Quarantine Zone",
+        "order": 1,
+        "missions": [
+          {
+            "id": "boston-quarantine-zone--the-outskirts",
+            "title": "The Outskirts",
+            "order": 0
+          },
+          {
+            "id": "boston-quarantine-zone--the-slums",
+            "title": "The Slums",
+            "order": 1
+          },
+          {
+            "id": "boston-quarantine-zone--the-cargo",
+            "title": "The Cargo",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "the-outskirts",
+        "title": "The Outskirts",
+        "order": 2,
+        "missions": [
+          {
+            "id": "the-outskirts--outside-boston",
+            "title": "Outside Boston",
+            "order": 0
+          },
+          {
+            "id": "the-outskirts--the-suburbs",
+            "title": "The Suburbs",
+            "order": 1
+          },
+          {
+            "id": "the-outskirts--the-woods",
+            "title": "The Woods",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "bill-s-town",
+        "title": "Bill's Town",
+        "order": 3,
+        "missions": [
+          {
+            "id": "bill-s-town--alone-and-forsaken",
+            "title": "Alone and Forsaken",
+            "order": 0
+          },
+          {
+            "id": "bill-s-town--safehouse",
+            "title": "Safehouse",
+            "order": 1
+          },
+          {
+            "id": "bill-s-town--the-car",
+            "title": "The Car",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "pittsburgh",
+        "title": "Pittsburgh",
+        "order": 4,
+        "missions": [
+          {
+            "id": "pittsburgh--alone-and-forsaken",
+            "title": "Alone and Forsaken",
+            "order": 0
+          },
+          {
+            "id": "pittsburgh--hotel-lobby",
+            "title": "Hotel Lobby",
+            "order": 1
+          },
+          {
+            "id": "pittsburgh--financial-district",
+            "title": "Financial District",
+            "order": 2
+          },
+          {
+            "id": "pittsburgh--escape-the-city",
+            "title": "Escape the City",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "the-suburbs",
+        "title": "The Suburbs",
+        "order": 5,
+        "missions": [
+          {
+            "id": "the-suburbs--lakeside-hotel",
+            "title": "Lakeside Hotel",
+            "order": 0
+          },
+          {
+            "id": "the-suburbs--ranch-house",
+            "title": "Ranch House",
+            "order": 1
+          },
+          {
+            "id": "the-suburbs--suburbs",
+            "title": "Suburbs",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "tommy-s-dam",
+        "title": "Tommy's Dam",
+        "order": 6,
+        "missions": [
+          {
+            "id": "tommy-s-dam--the-dam",
+            "title": "The Dam",
+            "order": 0
+          },
+          {
+            "id": "tommy-s-dam--hydroelectric-dam",
+            "title": "Hydroelectric Dam",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "the-university",
+        "title": "The University",
+        "order": 7,
+        "missions": [
+          {
+            "id": "the-university--college-campus",
+            "title": "College Campus",
+            "order": 0
+          },
+          {
+            "id": "the-university--science-building",
+            "title": "Science Building",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "lakeside-resort",
+        "title": "Lakeside Resort",
+        "order": 8,
+        "missions": [
+          {
+            "id": "lakeside-resort--cabin-resort",
+            "title": "Cabin Resort",
+            "order": 0
+          },
+          {
+            "id": "lakeside-resort--the-woods",
+            "title": "The Woods",
+            "order": 1
+          },
+          {
+            "id": "lakeside-resort--lakeside-resort",
+            "title": "Lakeside Resort",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "bus-depot",
+        "title": "Bus Depot",
+        "order": 9,
+        "missions": [
+          {
+            "id": "bus-depot--bus-depot",
+            "title": "Bus Depot",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-firefly-lab",
+        "title": "The Firefly Lab",
+        "order": 10,
+        "missions": [
+          {
+            "id": "the-firefly-lab--salt-lake-city",
+            "title": "Salt Lake City",
+            "order": 0
+          },
+          {
+            "id": "the-firefly-lab--st-marys-hospital",
+            "title": "St. Mary's Hospital",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "jackson",
+        "title": "Jackson",
+        "order": 11,
+        "missions": [
+          {
+            "id": "jackson--epilogue",
+            "title": "Epilogue",
+            "order": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "rawgId": 58175,
+    "title": "God of War Ragnarok",
+    "source": "manual",
+    "sourceUrl": "https://www.powerpyx.com/god-of-war-ragnarok-walkthrough/",
+    "acts": [
+      {
+        "id": "surviving-fimbulwinter",
+        "title": "Surviving Fimbulwinter",
+        "order": 0,
+        "missions": [
+          {
+            "id": "surviving-fimbulwinter--surviving-fimbulwinter",
+            "title": "Surviving Fimbulwinter",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-quest-for-tyr",
+        "title": "The Quest for Tyr",
+        "order": 1,
+        "missions": [
+          {
+            "id": "the-quest-for-tyr--the-quest-for-tyr",
+            "title": "The Quest for Tyr",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "old-friends",
+        "title": "Old Friends",
+        "order": 2,
+        "missions": [
+          {
+            "id": "old-friends--old-friends",
+            "title": "Old Friends",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "groa-s-secret",
+        "title": "Groa's Secret",
+        "order": 3,
+        "missions": [
+          {
+            "id": "groa-s-secret--groa-s-secret",
+            "title": "Groa's Secret",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-reckoning",
+        "title": "The Reckoning",
+        "order": 4,
+        "missions": [
+          {
+            "id": "the-reckoning--the-reckoning",
+            "title": "The Reckoning",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-summoning",
+        "title": "The Summoning",
+        "order": 5,
+        "missions": [
+          {
+            "id": "the-summoning--the-summoning",
+            "title": "The Summoning",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-realms-at-war",
+        "title": "The Realms at War",
+        "order": 6,
+        "missions": [
+          {
+            "id": "the-realms-at-war--the-realms-at-war",
+            "title": "The Realms at War",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "into-the-fire",
+        "title": "Into the Fire",
+        "order": 7,
+        "missions": [
+          {
+            "id": "into-the-fire--into-the-fire",
+            "title": "Into the Fire",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-word-of-fate",
+        "title": "The Word of Fate",
+        "order": 8,
+        "missions": [
+          {
+            "id": "the-word-of-fate--the-word-of-fate",
+            "title": "The Word of Fate",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "forging-destiny",
+        "title": "Forging Destiny",
+        "order": 9,
+        "missions": [
+          {
+            "id": "forging-destiny--forging-destiny",
+            "title": "Forging Destiny",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-realms-at-war-ii",
+        "title": "Unleashing Hel",
+        "order": 10,
+        "missions": [
+          {
+            "id": "unleashing-hel--unleashing-hel",
+            "title": "Unleashing Hel",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-boy-and-the-wolf",
+        "title": "The Boy and the Wolf",
+        "order": 11,
+        "missions": [
+          {
+            "id": "the-boy-and-the-wolf--the-boy-and-the-wolf",
+            "title": "The Boy and the Wolf",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "ceasefire",
+        "title": "Ceasefire",
+        "order": 12,
+        "missions": [
+          {
+            "id": "ceasefire--ceasefire",
+            "title": "Ceasefire",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "epilogue-ragnarok",
+        "title": "Epilogue",
+        "order": 13,
+        "missions": [
+          {
+            "id": "epilogue-ragnarok--epilogue",
+            "title": "Epilogue",
+            "order": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "rawgId": 41494,
+    "title": "The Last of Us Part II",
+    "source": "manual",
+    "sourceUrl": "https://www.powerpyx.com/the-last-of-us-2-walkthrough-all-chapters/",
+    "acts": [
+      {
+        "id": "jackson",
+        "title": "Jackson",
+        "order": 0,
+        "missions": [
+          {
+            "id": "jackson--prologue",
+            "title": "Prologue",
+            "order": 0
+          },
+          {
+            "id": "jackson--waking-up",
+            "title": "Waking Up",
+            "order": 1
+          },
+          {
+            "id": "jackson--the-overlook",
+            "title": "The Overlook",
+            "order": 2
+          },
+          {
+            "id": "jackson--patrol",
+            "title": "Patrol",
+            "order": 3
+          },
+          {
+            "id": "jackson--the-horde",
+            "title": "The Horde",
+            "order": 4
+          },
+          {
+            "id": "jackson--the-chalet",
+            "title": "The Chalet",
+            "order": 5
+          },
+          {
+            "id": "jackson--packing-up",
+            "title": "Packing Up",
+            "order": 6
+          }
+        ]
+      },
+      {
+        "id": "seattle-day-1-ellie",
+        "title": "Seattle Day 1 (Ellie)",
+        "order": 1,
+        "missions": [
+          {
+            "id": "seattle-day-1-ellie--the-gate",
+            "title": "The Gate",
+            "order": 0
+          },
+          {
+            "id": "seattle-day-1-ellie--downtown",
+            "title": "Downtown",
+            "order": 1
+          },
+          {
+            "id": "seattle-day-1-ellie--eastbrook-elementary",
+            "title": "Eastbrook Elementary",
+            "order": 2
+          },
+          {
+            "id": "seattle-day-1-ellie--capitol-hill",
+            "title": "Capitol Hill",
+            "order": 3
+          },
+          {
+            "id": "seattle-day-1-ellie--channel-13",
+            "title": "Channel 13",
+            "order": 4
+          },
+          {
+            "id": "seattle-day-1-ellie--the-tunnels",
+            "title": "The Tunnels",
+            "order": 5
+          },
+          {
+            "id": "seattle-day-1-ellie--the-theater",
+            "title": "The Theater",
+            "order": 6
+          },
+          {
+            "id": "seattle-day-1-ellie--the-birthday-gift",
+            "title": "The Birthday Gift",
+            "order": 7
+          }
+        ]
+      },
+      {
+        "id": "seattle-day-2-ellie",
+        "title": "Seattle Day 2 (Ellie)",
+        "order": 2,
+        "missions": [
+          {
+            "id": "seattle-day-2-ellie--hillcrest",
+            "title": "Hillcrest",
+            "order": 0
+          },
+          {
+            "id": "seattle-day-2-ellie--finding-strings",
+            "title": "Finding Strings",
+            "order": 1
+          },
+          {
+            "id": "seattle-day-2-ellie--the-seraphites",
+            "title": "The Seraphites",
+            "order": 2
+          },
+          {
+            "id": "seattle-day-2-ellie--st-marys-hospital",
+            "title": "St. Mary's Hospital",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "seattle-day-3-ellie",
+        "title": "Seattle Day 3 (Ellie)",
+        "order": 3,
+        "missions": [
+          {
+            "id": "seattle-day-3-ellie--road-to-the-aquarium",
+            "title": "Road to the Aquarium",
+            "order": 0
+          },
+          {
+            "id": "seattle-day-3-ellie--the-flooded-city",
+            "title": "The Flooded City",
+            "order": 1
+          },
+          {
+            "id": "seattle-day-3-ellie--infiltration",
+            "title": "Infiltration",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "the-park",
+        "title": "The Park",
+        "order": 4,
+        "missions": [
+          {
+            "id": "the-park--tracking-lesson",
+            "title": "Tracking Lesson",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "seattle-day-1-abby",
+        "title": "Seattle Day 1 (Abby)",
+        "order": 5,
+        "missions": [
+          {
+            "id": "seattle-day-1-abby--the-stadium",
+            "title": "The Stadium",
+            "order": 0
+          },
+          {
+            "id": "seattle-day-1-abby--on-foot",
+            "title": "On Foot",
+            "order": 1
+          },
+          {
+            "id": "seattle-day-1-abby--the-forward-base",
+            "title": "The Forward Base",
+            "order": 2
+          },
+          {
+            "id": "seattle-day-1-abby--the-aquarium",
+            "title": "The Aquarium",
+            "order": 3
+          },
+          {
+            "id": "seattle-day-1-abby--hostile-territory",
+            "title": "Hostile Territory",
+            "order": 4
+          },
+          {
+            "id": "seattle-day-1-abby--winter-visit",
+            "title": "Winter Visit",
+            "order": 5
+          },
+          {
+            "id": "seattle-day-1-abby--the-forest",
+            "title": "The Forest",
+            "order": 6
+          },
+          {
+            "id": "seattle-day-1-abby--the-coast",
+            "title": "The Coast",
+            "order": 7
+          },
+          {
+            "id": "seattle-day-1-abby--return-to-the-coast",
+            "title": "Return to the Coast",
+            "order": 8
+          }
+        ]
+      },
+      {
+        "id": "seattle-day-2-abby",
+        "title": "Seattle Day 2 (Abby)",
+        "order": 6,
+        "missions": [
+          {
+            "id": "seattle-day-2-abby--the-shortcut",
+            "title": "The Shortcut",
+            "order": 0
+          },
+          {
+            "id": "seattle-day-2-abby--the-descent",
+            "title": "The Descent",
+            "order": 1
+          },
+          {
+            "id": "seattle-day-2-abby--ground-zero",
+            "title": "Ground Zero",
+            "order": 2
+          },
+          {
+            "id": "seattle-day-2-abby--return-to-the-aquarium",
+            "title": "Return to the Aquarium",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "seattle-day-3-abby",
+        "title": "Seattle Day 3 (Abby)",
+        "order": 7,
+        "missions": [
+          {
+            "id": "seattle-day-3-abby--the-marina",
+            "title": "The Marina",
+            "order": 0
+          },
+          {
+            "id": "seattle-day-3-abby--the-island",
+            "title": "The Island",
+            "order": 1
+          },
+          {
+            "id": "seattle-day-3-abby--the-escape",
+            "title": "The Escape",
+            "order": 2
+          },
+          {
+            "id": "seattle-day-3-abby--the-confrontation",
+            "title": "The Confrontation",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "the-farm",
+        "title": "The Farm",
+        "order": 8,
+        "missions": [
+          {
+            "id": "the-farm--the-farm",
+            "title": "The Farm",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "santa-barbara",
+        "title": "Santa Barbara",
+        "order": 9,
+        "missions": [
+          {
+            "id": "santa-barbara--2425-constance",
+            "title": "2425 Constance",
+            "order": 0
+          },
+          {
+            "id": "santa-barbara--pushing-inland",
+            "title": "Pushing Inland",
+            "order": 1
+          },
+          {
+            "id": "santa-barbara--the-resort",
+            "title": "The Resort",
+            "order": 2
+          },
+          {
+            "id": "santa-barbara--the-beach",
+            "title": "The Beach",
+            "order": 3
+          }
+        ]
+      },
+      {
+        "id": "epilogue",
+        "title": "Epilogue",
+        "order": 10,
+        "missions": [
+          {
+            "id": "epilogue--epilogue",
+            "title": "Epilogue",
+            "order": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "rawgId": 278522,
+    "title": "Horizon Forbidden West",
+    "source": "manual",
+    "sourceUrl": "https://www.powerpyx.com/horizon-forbidden-west-walkthrough/",
+    "acts": [
+      {
+        "id": "reach-for-the-stars",
+        "title": "Reach for the Stars",
+        "order": 0,
+        "missions": [
+          {
+            "id": "reach-for-the-stars--reach-for-the-stars",
+            "title": "Reach for the Stars",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-embassy",
+        "title": "The Embassy",
+        "order": 1,
+        "missions": [
+          {
+            "id": "the-embassy--the-embassy",
+            "title": "The Embassy",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "to-the-brink",
+        "title": "To the Brink",
+        "order": 2,
+        "missions": [
+          {
+            "id": "to-the-brink--to-the-brink",
+            "title": "To the Brink",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-dying-lands",
+        "title": "The Dying Lands",
+        "order": 3,
+        "missions": [
+          {
+            "id": "the-dying-lands--the-dying-lands",
+            "title": "The Dying Lands",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-broken-sky",
+        "title": "The Broken Sky",
+        "order": 4,
+        "missions": [
+          {
+            "id": "the-broken-sky--the-broken-sky",
+            "title": "The Broken Sky",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-wound-in-the-world",
+        "title": "The Wound in the World",
+        "order": 5,
+        "missions": [
+          {
+            "id": "the-wound-in-the-world--the-wound-in-the-world",
+            "title": "The Wound in the World",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "seeds-of-the-past",
+        "title": "Seeds of the Past",
+        "order": 6,
+        "missions": [
+          {
+            "id": "seeds-of-the-past--seeds-of-the-past",
+            "title": "Seeds of the Past",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "the-sea-of-sands",
+        "title": "The Sea of Sands",
+        "order": 7,
+        "missions": [
+          {
+            "id": "the-sea-of-sands--the-sea-of-sands",
+            "title": "The Sea of Sands",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "legacy",
+        "title": "Legacy",
+        "order": 8,
+        "missions": [
+          {
+            "id": "legacy--legacy",
+            "title": "Legacy",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "gemini",
+        "title": "Gemini",
+        "order": 9,
+        "missions": [
+          {
+            "id": "gemini--gemini",
+            "title": "Gemini",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "singularity",
+        "title": "Singularity",
+        "order": 10,
+        "missions": [
+          {
+            "id": "singularity--singularity",
+            "title": "Singularity",
+            "order": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "rawgId": 3328,
+    "title": "The Witcher 3: Wild Hunt",
+    "source": "manual",
+    "sourceUrl": "https://www.powerpyx.com/the-witcher-3-wild-hunt-walkthrough/",
+    "acts": [
+      {
+        "id": "prologue-white-orchard",
+        "title": "Prologue: White Orchard",
+        "order": 0,
+        "missions": [
+          {
+            "id": "prologue-white-orchard--lilac-and-gooseberries",
+            "title": "Lilac and Gooseberries",
+            "order": 0
+          },
+          {
+            "id": "prologue-white-orchard--the-beast-of-white-orchard",
+            "title": "The Beast of White Orchard",
+            "order": 1
+          },
+          {
+            "id": "prologue-white-orchard--imperial-audience",
+            "title": "Imperial Audience",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "act-1-velen-novigrad",
+        "title": "Act 1: Velen / Novigrad",
+        "order": 1,
+        "missions": [
+          {
+            "id": "act-1--the-nilfgaardian-connection",
+            "title": "The Nilfgaardian Connection",
+            "order": 0
+          },
+          {
+            "id": "act-1--hunting-a-witch",
+            "title": "Hunting a Witch",
+            "order": 1
+          },
+          {
+            "id": "act-1--wandering-in-the-dark",
+            "title": "Wandering in the Dark",
+            "order": 2
+          },
+          {
+            "id": "act-1--ladies-of-the-wood",
+            "title": "Ladies of the Wood",
+            "order": 3
+          },
+          {
+            "id": "act-1--bloody-baron",
+            "title": "Bloody Baron",
+            "order": 4
+          },
+          {
+            "id": "act-1--a-dangerous-game",
+            "title": "A Dangerous Game",
+            "order": 5
+          },
+          {
+            "id": "act-1--an-eye-for-an-eye",
+            "title": "An Eye for an Eye",
+            "order": 6
+          },
+          {
+            "id": "act-1--a-matter-of-life-and-death",
+            "title": "A Matter of Life and Death",
+            "order": 7
+          },
+          {
+            "id": "act-1--now-or-never",
+            "title": "Now or Never",
+            "order": 8
+          },
+          {
+            "id": "act-1--get-junior",
+            "title": "Get Junior",
+            "order": 9
+          },
+          {
+            "id": "act-1--count-reuven-s-treasure",
+            "title": "Count Reuven's Treasure",
+            "order": 10
+          },
+          {
+            "id": "act-1--the-eternal-fire-s-shadow",
+            "title": "The Eternal Fire's Shadow",
+            "order": 11
+          },
+          {
+            "id": "act-1--broken-flowers",
+            "title": "Broken Flowers",
+            "order": 12
+          },
+          {
+            "id": "act-1--the-play-s-the-thing",
+            "title": "The Play's the Thing",
+            "order": 13
+          },
+          {
+            "id": "act-1--a-poet-under-pressure",
+            "title": "A Poet Under Pressure",
+            "order": 14
+          },
+          {
+            "id": "act-1--va-fail-elaine",
+            "title": "Va Fail, Elaine",
+            "order": 15
+          }
+        ]
+      },
+      {
+        "id": "act-1-skellige",
+        "title": "Act 1: Skellige",
+        "order": 2,
+        "missions": [
+          {
+            "id": "act-1-skellige--the-king-is-dead-long-live-the-king",
+            "title": "The King is Dead - Long Live the King",
+            "order": 0
+          },
+          {
+            "id": "act-1-skellige--missing-persons",
+            "title": "Missing Persons",
+            "order": 1
+          },
+          {
+            "id": "act-1-skellige--the-lord-of-undvik",
+            "title": "The Lord of Undvik",
+            "order": 2
+          },
+          {
+            "id": "act-1-skellige--the-champion-of-champions",
+            "title": "The Champion of Champions",
+            "order": 3
+          },
+          {
+            "id": "act-1-skellige--nameless",
+            "title": "Nameless",
+            "order": 4
+          },
+          {
+            "id": "act-1-skellige--the-battle-of-kaer-morhen",
+            "title": "The Battle of Kaer Morhen",
+            "order": 5
+          }
+        ]
+      },
+      {
+        "id": "act-2",
+        "title": "Act 2",
+        "order": 3,
+        "missions": [
+          {
+            "id": "act-2--blood-on-the-battlefield",
+            "title": "Blood on the Battlefield",
+            "order": 0
+          },
+          {
+            "id": "act-2--final-preparations",
+            "title": "Final Preparations",
+            "order": 1
+          },
+          {
+            "id": "act-2--child-of-the-elder-blood",
+            "title": "Child of the Elder Blood",
+            "order": 2
+          },
+          {
+            "id": "act-2--bald-mountain",
+            "title": "Bald Mountain",
+            "order": 3
+          },
+          {
+            "id": "act-2--through-time-and-space",
+            "title": "Through Time and Space",
+            "order": 4
+          },
+          {
+            "id": "act-2--the-file-of-yennefer",
+            "title": "The File of Yennefer",
+            "order": 5
+          }
+        ]
+      },
+      {
+        "id": "act-3-epilogue",
+        "title": "Act 3 / Epilogue",
+        "order": 4,
+        "missions": [
+          {
+            "id": "act-3--on-thin-ice",
+            "title": "On Thin Ice",
+            "order": 0
+          },
+          {
+            "id": "act-3--swallow-nest",
+            "title": "Swallow Nest",
+            "order": 1
+          },
+          {
+            "id": "act-3--echoes-of-the-past",
+            "title": "Echoes of the Past",
+            "order": 2
+          },
+          {
+            "id": "act-3--the-race",
+            "title": "The Race",
+            "order": 3
+          },
+          {
+            "id": "act-3--the-final-trial",
+            "title": "The Final Trial",
+            "order": 4
+          },
+          {
+            "id": "act-3--something-ends-something-begins",
+            "title": "Something Ends, Something Begins",
+            "order": 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "rawgId": 4200,
+    "title": "Portal 2",
+    "source": "manual",
+    "sourceUrl": "https://www.ign.com/wikis/portal-2/Walkthrough",
+    "acts": [
+      {
+        "id": "chapter-1",
+        "title": "Chapter 1: The Courtesy Call",
+        "order": 0,
+        "missions": [
+          {
+            "id": "chapter-1--waking-up",
+            "title": "Waking Up",
+            "order": 0
+          },
+          {
+            "id": "chapter-1--escape-from-the-relaxation-vault",
+            "title": "Escape from the Relaxation Vault",
+            "order": 1
+          },
+          {
+            "id": "chapter-1--the-facility",
+            "title": "The Facility",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "chapter-2",
+        "title": "Chapter 2: The Cold Boot",
+        "order": 1,
+        "missions": [
+          {
+            "id": "chapter-2--old-aperture",
+            "title": "Old Aperture",
+            "order": 0
+          },
+          {
+            "id": "chapter-2--test-chambers",
+            "title": "Test Chambers",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "chapter-3",
+        "title": "Chapter 3: The Return",
+        "order": 2,
+        "missions": [
+          {
+            "id": "chapter-3--glados-chambers",
+            "title": "GLaDOS Chambers",
+            "order": 0
+          },
+          {
+            "id": "chapter-3--tube-ride",
+            "title": "Tube Ride",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "chapter-4",
+        "title": "Chapter 4: The Surprise",
+        "order": 3,
+        "missions": [
+          {
+            "id": "chapter-4--the-reassembly",
+            "title": "The Reassembly",
+            "order": 0
+          },
+          {
+            "id": "chapter-4--test-chambers-with-wheatley",
+            "title": "Test Chambers with Wheatley",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "chapter-5",
+        "title": "Chapter 5: The Escape",
+        "order": 4,
+        "missions": [
+          {
+            "id": "chapter-5--escape-sequence",
+            "title": "Escape Sequence",
+            "order": 0
+          },
+          {
+            "id": "chapter-5--underground",
+            "title": "Underground",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "chapter-6",
+        "title": "Chapter 6: The Fall",
+        "order": 5,
+        "missions": [
+          {
+            "id": "chapter-6--old-aperture-science",
+            "title": "Old Aperture Science",
+            "order": 0
+          },
+          {
+            "id": "chapter-6--cave-johnson-chambers",
+            "title": "Cave Johnson Chambers",
+            "order": 1
+          },
+          {
+            "id": "chapter-6--the-pit",
+            "title": "The Pit",
+            "order": 2
+          }
+        ]
+      },
+      {
+        "id": "chapter-7",
+        "title": "Chapter 7: The Reunion",
+        "order": 6,
+        "missions": [
+          {
+            "id": "chapter-7--glados-potato",
+            "title": "GLaDOS Potato",
+            "order": 0
+          },
+          {
+            "id": "chapter-7--wheatley-boss-prep",
+            "title": "Wheatley Boss Prep",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "id": "chapter-8",
+        "title": "Chapter 8: The Itch",
+        "order": 7,
+        "missions": [
+          {
+            "id": "chapter-8--wheatley-test-chambers",
+            "title": "Wheatley Test Chambers",
+            "order": 0
+          }
+        ]
+      },
+      {
+        "id": "chapter-9",
+        "title": "Chapter 9: The Part Where He Kills You",
+        "order": 8,
+        "missions": [
+          {
+            "id": "chapter-9--final-boss",
+            "title": "Final Boss: Wheatley",
+            "order": 0
+          },
+          {
+            "id": "chapter-9--ending",
+            "title": "Ending",
+            "order": 1
+          }
+        ]
+      }
+    ]
+  }
+]
