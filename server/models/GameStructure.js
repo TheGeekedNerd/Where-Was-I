@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 
 const missionSchema = new mongoose.Schema({
-  id:    { type: String, required: true },
-  title: { type: String, required: true },
-  order: { type: Number, required: true },
+  id:          { type: String, required: true },
+  title:       { type: String, required: true },
+  order:       { type: Number, required: true },
+  description: { type: String, default: null },   // AI-generated spoiler-free teaser
 }, { _id: false })
 
 const actSchema = new mongoose.Schema({
@@ -16,7 +17,7 @@ const actSchema = new mongoose.Schema({
 const gameStructureSchema = new mongoose.Schema({
   rawgId:      { type: Number, required: true, unique: true },
   title:       { type: String, required: true },
-  source:      { type: String, default: 'ign' },
+  source:      { type: String, default: 'manual' },
   sourceUrl:   { type: String, required: true },
   lastScraped: { type: Date,   default: Date.now },
   acts:        [actSchema],
