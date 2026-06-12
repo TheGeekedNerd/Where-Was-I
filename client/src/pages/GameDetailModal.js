@@ -38,6 +38,7 @@ function ProgressBar({ completed, total }) {
 }
 
 function MissionRow({ mission, isReadOnly, onComplete, completing }) {
+  // Locked
   if (mission.locked) {
     return ce('div', { className: 'gdm-mission gdm-mission--locked' },
       ce('div', { className: 'gdm-mission-lock-icon' },
@@ -49,6 +50,7 @@ function MissionRow({ mission, isReadOnly, onComplete, completing }) {
     )
   }
 
+  // Completed
   if (mission.completed) {
     return ce('div', { className: 'gdm-mission gdm-mission--completed' },
       ce('div', { className: 'gdm-mission-check' },
@@ -58,24 +60,34 @@ function MissionRow({ mission, isReadOnly, onComplete, completing }) {
     )
   }
 
+  // Current — show description teaser if available
   if (mission.current) {
     return ce('div', { className: 'gdm-mission gdm-mission--current' },
-      ce('div', { className: 'gdm-mission-dot' }),
-      ce('span', { className: 'gdm-mission-title' }, mission.title),
-      !isReadOnly && ce('button', {
-        className:  'gdm-mission-btn',
-        onClick:    () => onComplete(mission.id),
-        disabled:   completing === mission.id,
-        title:      'Mark as done'
-      },
-        completing === mission.id
-          ? ce(IconLoader2, { size: 12, stroke: 2, className: 'gdm-spin' })
-          : 'Done'
+      ce('div', { className: 'gdm-mission-current-left' },
+        ce('div', { className: 'gdm-mission-dot' })
+      ),
+      ce('div', { className: 'gdm-mission-current-body' },
+        ce('div', { className: 'gdm-mission-current-top' },
+          ce('span', { className: 'gdm-mission-title' }, mission.title),
+          !isReadOnly && ce('button', {
+            className: 'gdm-mission-btn',
+            onClick:   () => onComplete(mission.id),
+            disabled:  completing === mission.id,
+            title:     'Mark as done'
+          },
+            completing === mission.id
+              ? ce(IconLoader2, { size: 12, stroke: 2, className: 'gdm-spin' })
+              : 'Done'
+          )
+        ),
+        mission.description && ce('p', { className: 'gdm-mission-description' },
+          mission.description
+        )
       )
     )
   }
 
-  // Future unlocked missions (shouldn't normally render but safe fallback)
+  // Upcoming (safe fallback)
   return ce('div', { className: 'gdm-mission gdm-mission--upcoming' },
     ce('div', { className: 'gdm-mission-upcoming-dot' }),
     ce('span', { className: 'gdm-mission-title' }, mission.title)
@@ -143,14 +155,12 @@ export default function GameDetailModal({ game, isReadOnly, onClose }) {
 
   const noStructure = error === 'no_structure'
 
-  // Close on Escape key
   useEffect(() => {
     function onKey(e) { if (e.key === 'Escape') onClose() }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
 
-  // Fetch gated structure
   const fetchStructure = useCallback(async () => {
     setLoading(true)
     setError(null)
@@ -160,7 +170,7 @@ export default function GameDetailModal({ game, isReadOnly, onClose }) {
       })
       const data = await res.json()
       if (res.status === 404) { setError('no_structure'); return }
-      if (!res.ok) { setError('fetch_failed'); return }
+      if (!res.ok)            { setError('fetch_failed'); return }
       setStructure(data)
     } catch {
       setError('fetch_failed')
@@ -174,16 +184,12 @@ export default function GameDetailModal({ game, isReadOnly, onClose }) {
   async function completeMission(missionId) {
     setCompleting(missionId)
     try {
-      const res  = await fetch(`${API_URL}/progress/${game.rawgId}/complete`, {
+      const res = await fetch(`${API_URL}/progress/${game.rawgId}/complete`, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${getToken()}` },
         body:    JSON.stringify({ missionId })
       })
-      const data = await res.json()
-      if (res.ok) {
-        // Re-fetch the gated structure so the next mission unlocks correctly
-        await fetchStructure()
-      }
+      if (res.ok) await fetchStructure()
     } catch (err) {
       console.error(err)
     } finally {
@@ -209,15 +215,12 @@ export default function GameDetailModal({ game, isReadOnly, onClose }) {
     }
   }
 
-  // ── Render ──────────────────────────────────────────────────────────────────
-
   return ce('div', {
     className: 'gdm-backdrop',
     onClick:   (e) => { if (e.target === e.currentTarget) onClose() }
   },
     ce('div', { className: 'gdm-modal', role: 'dialog', 'aria-modal': 'true' },
 
-      // Cover banner
       ce('div', {
         className: 'gdm-cover',
         style: { backgroundImage: game.cover ? `url(${game.cover})` : 'none' }
@@ -237,45 +240,37 @@ export default function GameDetailModal({ game, isReadOnly, onClose }) {
         )
       ),
 
-      // Body
       ce('div', { className: 'gdm-body' },
 
-        // ── No structure available ──
         noStructure && ce('div', { className: 'gdm-no-structure' },
           ce(IconDeviceGamepad2, { size: 36, stroke: 1 }),
-          ce('p', null, 'Story tracker not available for this game yet'),
-          ce('span', null, 'Check back later or add it to sources.json')
+          ce('p',    null, 'Story tracker not available for this game yet'),
+          ce('span', null, 'Check back later or add it to game-structures.json')
         ),
 
-        // ── Loading ──
         !noStructure && loading && ce('div', { className: 'gdm-loading' },
           ce(IconLoader2, { size: 24, stroke: 1.5, className: 'gdm-spin' })
         ),
 
-        // ── Fetch error ──
         !noStructure && !loading && error === 'fetch_failed' && ce('div', { className: 'gdm-error' },
           ce(IconAlertTriangle, { size: 24, stroke: 1.5 }),
           ce('p', null, 'Failed to load story structure'),
           ce('button', { className: 'gdm-retry-btn', onClick: fetchStructure }, 'Retry')
         ),
 
-        // ── Structure loaded ──
         !noStructure && !loading && !error && structure && ce(React.Fragment, null,
 
-          // Progress bar
           ce(ProgressBar, {
             completed: structure.completedCount,
             total:     structure.totalMissions,
           }),
 
-          // Fully finished banner
           structure.completedCount === structure.totalMissions &&
           structure.totalMissions > 0 &&
           ce('div', { className: 'gdm-finished-banner' },
             '🎮 You finished this one. Respect.'
           ),
 
-          // Reset button (not shown in read-only / fully locked)
           !isReadOnly && structure.completedCount > 0 && ce('div', { className: 'gdm-reset-row' },
             !showConfirm
               ? ce('button', {
@@ -303,7 +298,6 @@ export default function GameDetailModal({ game, isReadOnly, onClose }) {
                 )
           ),
 
-          // Acts + missions
           ce('div', { className: 'gdm-acts' },
             ...structure.acts.map((act, i) =>
               ce(ActSection, {
