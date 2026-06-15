@@ -124,16 +124,6 @@ function GameCard({ game, onShieldToggle, onNavigate }) {
         ? ce('span', { className: 'ov-mission-count' },
             `${completedCount} / ${totalMissions} missions`)
         : ce('span', { className: 'ov-mission-count ov-mission-count--dim' }, '—'),
-
-      ce('button', {
-        className: `ov-shield ${spoilerShield ? 'ov-shield--on' : 'ov-shield--off'}`,
-        onClick:   handleShieldClick,
-        title:     spoilerShield ? 'Spoiler shield on — click to disable' : 'Spoiler shield off — click to enable',
-      },
-        spoilerShield
-          ? ce(React.Fragment, null, ce(IconShieldCheck, { size: 13, stroke: 1.5 }), ' Shield on')
-          : ce(React.Fragment, null, ce(IconShieldOff,   { size: 13, stroke: 1.5 }), ' Shield off')
-      ),
     ),
   )
 }
