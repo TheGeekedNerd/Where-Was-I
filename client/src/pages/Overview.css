@@ -11,6 +11,62 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Error banner ── */
+.ov-error {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 80, 80, 0.08);
+  border: 1px solid rgba(255, 80, 80, 0.25);
+  border-radius: 10px;
+  color: #ff6b6b;
+  font-size: 13px;
+}
+
+.ov-error__retry {
+  margin-left: auto;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 80, 80, 0.35);
+  background: transparent;
+  color: #ff6b6b;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.ov-error__retry:hover { background: rgba(255, 80, 80, 0.12); }
+
+/* ── Skeleton ── */
+.ov-skeleton {
+  background: linear-gradient(90deg, #222 25%, #2a2a2a 50%, #222 75%);
+  background-size: 200% 100%;
+  animation: ovShimmer 1.4s infinite;
+  border-radius: 6px;
+}
+
+@keyframes ovShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.ov-skel-icon       { width: 18px;  height: 18px; border-radius: 4px; }
+.ov-skel-label      { width: 80px;  height: 11px; margin-top: 6px; }
+.ov-skel-value      { width: 48px;  height: 28px; margin-top: 4px; }
+.ov-skel-sub        { width: 100px; height: 10px; margin-top: 4px; }
+.ov-skel-thumb      { width: 36px;  height: 36px; border-radius: 6px; flex-shrink: 0; }
+.ov-skel-title      { width: 120px; height: 13px; }
+.ov-skel-type       { width: 80px;  height: 10px; margin-top: 4px; }
+.ov-skel-checkpoint { width: 100px; height: 11px; }
+.ov-skel-bar        { width: 100%;  height: 5px; border-radius: 3px; }
+.ov-skel-dot        { width: 16px;  height: 16px; border-radius: 50%; flex-shrink: 0; }
+.ov-skel-act-text   { width: 85%;   height: 12px; }
+.ov-skel-act-time   { width: 55%;   height: 10px; margin-top: 4px; }
+.ov-skel-un-title   { width: 120px; height: 13px; }
+.ov-skel-un-sub     { width: 160px; height: 10px; margin-top: 4px; }
+.ov-skel-un-tag     { width: 90px;  height: 10px; margin-top: 6px; }
+
 /* ── Stat cards row ── */
 .ov-stats-row {
   display: grid;
@@ -34,29 +90,10 @@
   background: #1e1e1e;
 }
 
-.ov-stat-icon {
-  color: rgba(0, 255, 137, 0.5);
-  margin-bottom: 0.25rem;
-}
-
-.ov-stat-label {
-  font-size: 12px;
-  color: rgba(0, 255, 137, 0.45);
-  font-weight: 500;
-  letter-spacing: 0.02em;
-}
-
-.ov-stat-value {
-  font-size: 28px;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.1;
-}
-
-.ov-stat-sub {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.3);
-}
+.ov-stat-icon  { color: rgba(0, 255, 137, 0.5); margin-bottom: 0.25rem; }
+.ov-stat-label { font-size: 12px; color: rgba(0, 255, 137, 0.45); font-weight: 500; letter-spacing: 0.02em; }
+.ov-stat-value { font-size: 28px; font-weight: 700; color: #fff; line-height: 1.1; }
+.ov-stat-sub   { font-size: 11px; color: rgba(255, 255, 255, 0.3); }
 
 /* ── Sections ── */
 .ov-section {
@@ -81,10 +118,7 @@
 }
 
 /* ── Filter pills ── */
-.ov-filter-pills {
-  display: flex;
-  gap: 0.35rem;
-}
+.ov-filter-pills { display: flex; gap: 0.35rem; }
 
 .ov-pill {
   padding: 4px 12px;
@@ -98,15 +132,23 @@
   transition: all 0.15s;
 }
 
-.ov-pill:hover {
-  border-color: rgba(0, 255, 137, 0.35);
-  color: #00ff89;
+.ov-pill:hover              { border-color: rgba(0, 255, 137, 0.35); color: #00ff89; }
+.ov-pill--active            { background: rgba(0, 255, 137, 0.12); border-color: rgba(0, 255, 137, 0.4); color: #00ff89; }
+
+/* ── Empty states ── */
+.ov-empty {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 13px;
+  padding: 1rem 0;
 }
 
-.ov-pill--active {
-  background: rgba(0, 255, 137, 0.12);
-  border-color: rgba(0, 255, 137, 0.4);
-  color: #00ff89;
+.ov-empty-panel {
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  min-height: 80px;
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 13px;
 }
 
 /* ── Game grid ── */
@@ -126,7 +168,7 @@
   flex-direction: column;
   gap: 0.7rem;
   transition: border-color 0.2s, background 0.2s, transform 0.15s;
-  cursor: default;
+  cursor: pointer;
 }
 
 .ov-game-card:hover {
@@ -146,7 +188,6 @@
   font-size: 13px;
   font-weight: 500;
   min-height: 130px;
-  cursor: pointer;
   transition: all 0.2s;
 }
 
@@ -159,18 +200,36 @@
 .ov-game-card__header {
   display: flex;
   align-items: flex-start;
-  gap: 0.6rem;
+  gap: 0.65rem;
 }
 
-.ov-game-card__icon {
-  margin-top: 2px;
+/* Cover thumbnail */
+.ov-game-card__thumb {
   flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
-.ov-game-card__info {
-  flex: 1;
-  min-width: 0;
+.ov-game-card__cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
+
+.ov-game-card__cover-placeholder {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 255, 137, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 255, 137, 0.3);
+}
+
+.ov-game-card__info { flex: 1; min-width: 0; }
 
 .ov-game-card__title {
   font-size: 14px;
@@ -185,6 +244,9 @@
   font-size: 11px;
   color: rgba(255, 255, 255, 0.35);
   margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ── Badges ── */
@@ -197,36 +259,17 @@
   letter-spacing: 0.02em;
 }
 
-.ov-badge--playing {
-  background: rgba(0, 255, 137, 0.12);
-  color: #00ff89;
-  border: 1px solid rgba(0, 255, 137, 0.25);
-}
-
-.ov-badge--paused {
-  background: rgba(255, 217, 61, 0.12);
-  color: #ffd93d;
-  border: 1px solid rgba(255, 217, 61, 0.25);
-}
-
-.ov-badge--completed {
-  background: rgba(100, 100, 255, 0.12);
-  color: #a5a5ff;
-  border: 1px solid rgba(100, 100, 255, 0.25);
-}
+.ov-badge--playing   { background: rgba(0, 255, 137, 0.12);  color: #00ff89; border: 1px solid rgba(0, 255, 137, 0.25); }
+.ov-badge--paused    { background: rgba(255, 217, 61, 0.12); color: #ffd93d; border: 1px solid rgba(255, 217, 61, 0.25); }
+.ov-badge--completed { background: rgba(100, 100, 255, 0.12); color: #a5a5ff; border: 1px solid rgba(100, 100, 255, 0.25); }
+.ov-badge--dropped   { background: rgba(150, 150, 150, 0.1); color: #888;    border: 1px solid rgba(150, 150, 150, 0.2); }
 
 /* ── Checkpoint ── */
-.ov-game-card__checkpoint {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
-}
+.ov-game-card__checkpoint     { font-size: 12px; color: rgba(255, 255, 255, 0.5); }
+.ov-game-card__checkpoint--dim { color: rgba(255, 255, 255, 0.2); font-style: italic; }
 
 /* ── Progress ── */
-.ov-progress-row {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
+.ov-progress-row { display: flex; align-items: center; gap: 0.6rem; }
 
 .ov-progress-bar {
   flex: 1;
@@ -238,17 +281,11 @@
 
 .ov-progress-fill {
   height: 100%;
-  background: var(--fill-color, #00ff89);
   border-radius: 3px;
   transition: width 0.5s ease;
 }
 
-.ov-progress-pct {
-  font-size: 12px;
-  font-weight: 600;
-  min-width: 32px;
-  text-align: right;
-}
+.ov-progress-pct { font-size: 12px; font-weight: 600; min-width: 32px; text-align: right; }
 
 /* ── Card footer ── */
 .ov-game-card__footer {
@@ -257,10 +294,8 @@
   justify-content: space-between;
 }
 
-.ov-location {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.35);
-}
+.ov-mission-count      { font-size: 11px; color: rgba(255, 255, 255, 0.35); }
+.ov-mission-count--dim { color: rgba(255, 255, 255, 0.18); }
 
 .ov-shield {
   display: flex;
@@ -268,10 +303,17 @@
   gap: 4px;
   font-size: 11px;
   font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: background 0.15s;
 }
 
-.ov-shield--on  { color: rgba(0, 255, 137, 0.6); }
-.ov-shield--off { color: rgba(255, 255, 255, 0.25); }
+.ov-shield:hover       { background: rgba(255, 255, 255, 0.06); }
+.ov-shield--on         { color: rgba(0, 255, 137, 0.6); }
+.ov-shield--off        { color: rgba(255, 255, 255, 0.25); }
 
 /* ── Bottom grid ── */
 .ov-bottom-grid {
@@ -301,26 +343,10 @@
   transition: background 0.15s;
 }
 
-.ov-activity-item:hover {
-  background: rgba(0, 255, 137, 0.04);
-}
-
-.ov-activity-dot {
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.ov-activity-text {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
-  font-weight: 400;
-}
-
-.ov-activity-time {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.3);
-  margin-top: 2px;
-}
+.ov-activity-item:hover { background: rgba(0, 255, 137, 0.04); }
+.ov-activity-dot        { margin-top: 2px; flex-shrink: 0; }
+.ov-activity-text       { font-size: 13px; color: rgba(255, 255, 255, 0.75); font-weight: 400; }
+.ov-activity-time       { font-size: 11px; color: rgba(255, 255, 255, 0.3); margin-top: 2px; }
 
 .ov-show-more {
   align-self: center;
@@ -338,11 +364,7 @@
   transition: all 0.2s;
 }
 
-.ov-show-more:hover {
-  background: rgba(0, 255, 137, 0.08);
-  color: #00ff89;
-  border-color: rgba(0, 255, 137, 0.4);
-}
+.ov-show-more:hover { background: rgba(0, 255, 137, 0.08); color: #00ff89; border-color: rgba(0, 255, 137, 0.4); }
 
 /* ── Up next ── */
 .ov-upnext-list {
@@ -360,27 +382,14 @@
   flex-direction: column;
   gap: 0.25rem;
   border-bottom: 1px solid rgba(0, 255, 137, 0.06);
+  cursor: pointer;
   transition: background 0.15s;
 }
 
-.ov-upnext-item:last-child {
-  border-bottom: none;
-}
-
-.ov-upnext-item:hover {
-  background: rgba(0, 255, 137, 0.04);
-}
-
-.ov-upnext-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: #fff;
-}
-
-.ov-upnext-sub {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.3);
-}
+.ov-upnext-item:last-child  { border-bottom: none; }
+.ov-upnext-item:hover       { background: rgba(0, 255, 137, 0.04); }
+.ov-upnext-title            { font-size: 13px; font-weight: 600; color: #fff; }
+.ov-upnext-sub              { font-size: 11px; color: rgba(255, 255, 255, 0.3); }
 
 .ov-upnext-tag {
   display: flex;
