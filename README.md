@@ -8,12 +8,12 @@ Built out of frustration with losing track of progress across multiple games and
 
 ## Features
 
--  **Game Discovery** — search 500,000+ games powered by the RAWG API, filtered to story-driven and linear titles
--  **Personal Library** — add games and track them as Playing, Completed, or Dropped
--  **Playthrough Counter** — automatically increments every time you mark a game as completed
--  **Profile Avatar** — upload a custom picture or pull it automatically from your Google/Discord account
--  **Authentication** — email/password registration and Google OAuth via Auth0
--  **Forgot Password** — full reset flow via email using Resend
+-  **Game Discovery**:search 500,000+ games powered by the RAWG API, filtered to story-driven and linear titles
+-  **Personal Library**: add games and track them as Playing, Completed, or Dropped
+-  **Playthrough Counter**: automatically increments every time you mark a game as completed
+-  **Profile Avatar**: upload a custom picture or pull it automatically from your Google/Discord account
+-  **Authentication**: email/password registration and Google OAuth via Auth0
+-  **Forgot Password**: full reset flow via email using Resend
 
 ---
 
@@ -23,7 +23,7 @@ Built out of frustration with losing track of progress across multiple games and
 
 | Technology | Purpose |
 |---|---|
-| React (no JSX) | UI — built entirely with `React.createElement` |
+| React (no JSX) | UI: built entirely with `React.createElement` |
 | Vite | Build tool and dev server |
 | React Router | Client-side routing |
 | Auth0 | Authentication and Google OAuth |
@@ -47,9 +47,9 @@ Built out of frustration with losing track of progress across multiple games and
 
 - Node.js v18+
 - A MongoDB database (local or Atlas)
-- A RAWG API key — [rawg.io](https://rawg.io/apidocs)
-- An Auth0 account — [auth0.com](https://auth0.com)
-- A Resend account — [resend.com](https://resend.com)
+- A RAWG API key:[rawg.io](https://rawg.io/apidocs)
+- An Auth0 account:[auth0.com](https://auth0.com)
+- A Resend account:[resend.com](https://resend.com)
 
 ### Installation
 
@@ -104,7 +104,7 @@ The client runs on `http://localhost:5173` and the server on `http://localhost:5
 | `RESEND_API_KEY` | Your Resend API key |
 | `CLIENT_URL` | Frontend URL, e.g. `http://localhost:5173` |
 ### Motivation behind creating this website
-During the 2025 June exams I was playing Red Dead Redemption 2, The Last of Us and The Last of Us Part 2. I know it was wrong for me to be focusing on games while it's exam season, but I needed to calm my nerves down so I decided to play those games. When I was playing Red Dead Redemption and going through the story I couldn't help but feel like I wasn't reaching the climax or the end of the story — don't get me wrong I did love the experience of playing the game but it just felt too long for me. Whenever I would log off I would go to IGN walkthroughs and search for the chapter title so that I could gauge where I was in the story, but I found that doing that every time was exhausting because what if I'm playing 2 games in one day — I would have to search their playthroughs and remember where I was in each game. So I was like, why not create a website that'll help make my gaming experience much less of a drag. For now this app focuses more on linear or story-based games, so games like Elden Ring are not yet catered to. Maybe one day if I make some progress in Elden Ring I'll add those kinds of games.
+During the 2025 June exams I was playing Red Dead Redemption 2, The Last of Us and The Last of Us Part 2. I know it was wrong for me to be focusing on games while it's exam season, but I needed to calm my nerves down so I decided to play those games. When I was playing Red Dead Redemption and going through the story I couldn't help but feel like I wasn't reaching the climax or the end of the story — don't get me wrong I did love the experience of playing the game but it just felt too long for me. Whenever I would log off I would go to IGN walkthroughs and search for the chapter title so that I could gauge where I was in the story, but I found that doing that every time was exhausting because what if I'm playing 2 games in one day I would have to search their playthroughs and remember where I was in each game. So I was like, why not create a website that'll help make my gaming experience much less of a drag. For now this app focuses more on linear or story-based games, so games like Elden Ring are not yet catered to. Maybe one day if I make some progress in Elden Ring I'll add those kinds of games.
 
 ---
 
