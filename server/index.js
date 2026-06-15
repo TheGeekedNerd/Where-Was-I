@@ -7,7 +7,8 @@ const { Resend } = require('resend')
 const crypto = require('crypto')
 require('dotenv').config()
 
-const libraryRoutes  = require('./routes/Library')
+const libraryRoutes  = require('./routes/library')
+const overviewRoutes = require('./routes/overview')
 const { progressRouter, structureRouter } = require('./routes/progress')
 
 const app = express()
@@ -241,6 +242,7 @@ app.delete('/user/delete', requireAuth, async (req, res) => {
 })
 
 app.use('/library',   requireAuth, libraryRoutes)
+app.use('/overview',  requireAuth, overviewRoutes)
 app.use('/progress',  requireAuth, progressRouter)
 app.use('/structure', requireAuth, structureRouter)
 
