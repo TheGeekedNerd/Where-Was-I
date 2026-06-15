@@ -20,11 +20,12 @@ function getToken() {
 
 const STATUS_LABELS = {
   playing:   'Playing',
+  paused:    'Paused',
   completed: 'Completed',
   dropped:   'Dropped',
 }
 
-const STATUS_OPTIONS = ['playing', 'completed', 'dropped']
+const STATUS_OPTIONS = ['playing', 'paused', 'completed', 'dropped']
 
 export default function MyGames() {
   const [games, setGames]           = useState([])
@@ -33,7 +34,7 @@ export default function MyGames() {
   const [updating, setUpdating]     = useState(null)
   const [openMenu, setOpenMenu]     = useState(null)
   const [filter, setFilter]         = useState('all')
-  const [activeGame, setActiveGame] = useState(null)   // game open in modal
+  const [activeGame, setActiveGame] = useState(null)
 
   useEffect(() => {
     async function fetchLibrary() {
@@ -43,7 +44,9 @@ export default function MyGames() {
           headers: { Authorization: `Bearer ${getToken()}` }
         })
         const data = await res.json()
-        if (res.ok) setGames(data.filter(g => g.status === 'playing' || g.status === 'dropped'))
+        if (res.ok) setGames(data.filter(g =>
+          g.status === 'playing' || g.status === 'paused' || g.status === 'dropped'
+        ))
       } catch (err) {
         console.error(err)
       } finally {
@@ -105,6 +108,7 @@ export default function MyGames() {
   const filterTabs = [
     { key: 'all',     label: 'All'     },
     { key: 'playing', label: 'Playing' },
+    { key: 'paused',  label: 'Paused'  },
     { key: 'dropped', label: 'Dropped' },
   ]
 
@@ -211,7 +215,6 @@ export default function MyGames() {
       )
     ),
 
-    // Modal
     activeGame && ce(GameDetailModal, {
       game:       activeGame,
       isReadOnly: false,

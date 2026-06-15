@@ -292,6 +292,12 @@
   text-align: center;
 }
 
+.mg-status-btn--paused {
+  background: rgba(255, 217, 61, 0.12);
+  border-color: rgba(255, 217, 61, 0.3);
+  color: #ffd93d;
+}
+
 .mg-empty p    { font-size: 15px; font-weight: 600; color: rgba(255, 255, 255, 0.4); }
 .mg-empty span { font-size: 13px; color: rgba(255, 255, 255, 0.2); }
 
