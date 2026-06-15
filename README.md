@@ -103,24 +103,8 @@ The client runs on `http://localhost:5173` and the server on `http://localhost:5
 | `JWT_SECRET` | A long random string used to sign tokens |
 | `RESEND_API_KEY` | Your Resend API key |
 | `CLIENT_URL` | Frontend URL, e.g. `http://localhost:5173` |
-
----
-
-## Screenshots
-
-> Coming soon
-
----
-
-## Roadmap
-
-| Status | Feature |
-|---|---|
-| 🔲 | Completed page — dedicated view for finished games |
-| 🔲 | Chapter and progress tracking within a game |
-| 🔲 | Spoiler shield — hide chapter names until you reach them |
-| 🔲 | Notes per game |
-| 🔲 | Mobile companion app — Shelved.fm, a music backlog tracker built with Expo |
+### Motivation behind creating this website
+During the 2025 June exams I was playing Red Dead Redemption 2, The Last of Us and The Last of Us Part 2. I know it was wrong for me to be focusing on games while it's exam season, but I needed to calm my nerves down so I decided to play those games. When I was playing Red Dead Redemption and going through the story I couldn't help but feel like I wasn't reaching the climax or the end of the story — don't get me wrong I did love the experience of playing the game but it just felt too long for me. Whenever I would log off I would go to IGN walkthroughs and search for the chapter title so that I could gauge where I was in the story, but I found that doing that every time was exhausting because what if I'm playing 2 games in one day — I would have to search their playthroughs and remember where I was in each game. So I was like, why not create a website that'll help make my gaming experience much less of a drag. For now this app focuses more on linear or story-based games, so games like Elden Ring are not yet catered to. Maybe one day if I make some progress in Elden Ring I'll add those kinds of games.
 
 ---
 
