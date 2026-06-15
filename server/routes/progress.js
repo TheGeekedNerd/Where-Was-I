@@ -16,6 +16,7 @@ const structureRouter  = express.Router()
 const GameStructure    = require('../models/GameStructure')
 const UserGameProgress = require('../models/UserGameProgress')
 const Game             = require('../models/Game')
+const ActivityLog      = require('../models/ActivityLog')
 const axios            = require('axios')
 const cheerio          = require('cheerio')
 const slugify          = require('slugify')
@@ -48,12 +49,7 @@ const http = axios.create({
 })
 
 // ── URL builders ──────────────────────────────────────────────────────────────
-// Given a game title and optional RAWG slug, construct candidate URLs for each
-// source. We generate multiple slug variants per source to handle remasters,
-// definitive editions, and other title suffixes that don't have their own pages.
 
-// Suffixes that never have their own walkthrough page — strip them and fall
-// back to the base game's page, which covers the same content.
 const REMASTER_SUFFIXES = [
   /[\s\-–:]+remastered$/i,
   /[\s\-–:]+remake$/i,
@@ -64,7 +60,7 @@ const REMASTER_SUFFIXES = [
   /[\s\-–:]+enhanced\s+edition$/i,
   /[\s\-–:]+royal\s+edition$/i,
   /[\s\-–:]+director['']?s\s+cut$/i,
-  /[\s\-–:]+part\s+i$/i,           // "The Last of Us Part I" → "The Last of Us"
+  /[\s\-–:]+part\s+i$/i,
 ]
 
 function normaliseTitle(title) {
@@ -79,14 +75,9 @@ function buildCandidateUrls(title, rawgSlug) {
   const baseTitle = normaliseTitle(title)
   const isDifferent = baseTitle.toLowerCase() !== title.toLowerCase()
 
-  // Slugs to try — always try the raw RAWG slug first (most accurate for
-  // PowerPyx/IGN), then the normalised title slug as a fallback.
   const rawSlug      = rawgSlug || slug(title)
   const normSlug     = slug(baseTitle)
 
-  // PowerPyx: try exact RAWG slug, then normalised, then with explicit suffix.
-  // Also try number-based short slugs (e.g. "the-last-of-us-2") that PowerPyx
-  // uses for sequels instead of "part-ii".
   const normSlugNumeric = normSlug
     .replace(/-part-ii$/, '-2')
     .replace(/-part-iii$/, '-3')
@@ -102,20 +93,17 @@ function buildCandidateUrls(title, rawgSlug) {
     isDifferent ? `https://www.powerpyx.com/${normSlugNumeric}-full-walkthrough-all-story-missions/` : null,
   ].filter(Boolean)
 
-  // IGN: standard /wikis/<slug>/Walkthrough pattern
   const ignUrls = [
     `https://www.ign.com/wikis/${rawSlug}/Walkthrough`,
     isDifferent ? `https://www.ign.com/wikis/${normSlug}/Walkthrough` : null,
   ].filter(Boolean)
 
-  // Fandom: subdomain from first segment of base title, path from full slug
   const fandomSub      = slug(baseTitle.split(':')[0].trim()).replace(/-/g, '')
   const fandomPathFull = slug(title).replace(/-/g, '_')
   const fandomPathNorm = slug(baseTitle).replace(/-/g, '_')
   const fandomUrls = [
     `https://${fandomSub}.fandom.com/wiki/${fandomPathFull}/Walkthrough`,
     isDifferent ? `https://${fandomSub}.fandom.com/wiki/${fandomPathNorm}/Walkthrough` : null,
-    // Some wikis use the game title directly as the page name
     `https://${fandomSub}.fandom.com/wiki/Walkthrough`,
     `https://${fandomSub}.fandom.com/wiki/${fandomPathNorm.replace(/_part_ii.*/, '')}_part_ii/Walkthrough`,
   ].filter(Boolean)
@@ -123,7 +111,7 @@ function buildCandidateUrls(title, rawgSlug) {
   return { powerpyxUrls, ignUrls, fandomUrls }
 }
 
-// ── Scrapers (mirrors scrape-wiki-structure.js) ───────────────────────────────
+// ── Scrapers ──────────────────────────────────────────────────────────────────
 
 const SKIP = /trophy|table of content|guide|tips|faq|100%|checklist|compendium|outfit|clothing|map|medal|collectible/i
 
@@ -138,8 +126,6 @@ async function scrapePowerPyx(url) {
   let currentAct = null
   let actOrder   = 0
 
-  // ── Strategy A: standard act/mission hierarchy ────────────────────────────
-  // Acts are h2/h3 headings or bold-only paragraphs; missions are ol/ul items.
   content.children().each((_, el) => {
     const tag  = el.tagName?.toLowerCase()
     const text = $(el).text().trim()
@@ -186,28 +172,20 @@ async function scrapePowerPyx(url) {
 
   let valid = acts.filter(a => a.missions.length > 0)
 
-  // ── Strategy B: index-page format ────────────────────────────────────────
-  // Some PowerPyx pages list everything in a single <ol> where the first <li>
-  // of each chapter is bold (the chapter name) and the rest are missions.
-  // e.g. https://www.powerpyx.com/the-last-of-us-2-walkthrough-all-chapters/
   if (valid.length === 0) {
     actOrder = 0
     content.find('ol, ul').each((_, list) => {
-      // Only process lists that have a bold first item (chapter name pattern)
       const firstBold = $(list).find('li').first().find('strong, b').first().text().trim()
       if (!firstBold) return
 
       $(list).find('> li').each((_, li) => {
         const bold      = $(li).find('strong, b').first()
         const boldText  = bold.text().trim()
-        const fullText  = $(li).clone().find('strong, b, ul, ol').remove().end().text().trim()
         const liText    = $(li).text().trim()
 
-        // Bold-only li = new chapter/act heading
-        if (boldText && liText.replace(/\s[\s\S]*/,'') === boldText && !SKIP.test(boldText)) {
+        if (boldText && liText.replace(/\s[\s\S]*/, '') === boldText && !SKIP.test(boldText)) {
           currentAct = { id: slug(boldText), title: boldText, order: actOrder++, missions: [] }
           acts.push(currentAct)
-          // Missions may be nested inside this li as a sub-list
           $(li).find('li').each((_, subli) => {
             const anchor = $(subli).find('a').first()
             const t = (anchor.length ? anchor.text() : $(subli).text()).trim()
@@ -222,7 +200,6 @@ async function scrapePowerPyx(url) {
           return
         }
 
-        // Plain li = mission under current act
         if (currentAct) {
           const anchor = $(li).find('a').first()
           const t = (anchor.length ? anchor.text() : liText).trim()
@@ -241,7 +218,6 @@ async function scrapePowerPyx(url) {
 
   if (valid.length === 0) throw new Error('PowerPyx: no acts with missions found')
 
-  // Quality gate
   const totalMissions = valid.reduce((s, a) => s + a.missions.length, 0)
   if (totalMissions < 5) {
     throw new Error(`PowerPyx: result too sparse (${totalMissions} missions) — likely site chrome`)
@@ -300,7 +276,6 @@ async function scrapeIGN(url) {
   const valid = acts.filter(a => a.missions.length > 0)
   if (valid.length === 0) throw new Error('IGN: no acts with missions found')
 
-  // Quality gate — reject if result looks like site navigation rather than game content
   const totalMissions = valid.reduce((s, a) => s + a.missions.length, 0)
   if (valid.length < 2 || totalMissions < 5) {
     throw new Error(`IGN: result too sparse (${valid.length} acts, ${totalMissions} missions) — likely site chrome`)
@@ -391,8 +366,6 @@ async function scrapeFandom(url) {
 // ── Orchestrator ──────────────────────────────────────────────────────────────
 
 async function fetchStructure(urls) {
-  // Each source receives an array of candidate URLs tried in order.
-  // Sources tried in priority: PowerPyx -> IGN -> Fandom.
   const sources = [
     { name: 'powerpyx', urls: urls.powerpyxUrls || (urls.powerpyx ? [urls.powerpyx] : []), fn: scrapePowerPyx },
     { name: 'ign',      urls: urls.ignUrls      || (urls.ign      ? [urls.ign]      : []), fn: scrapeIGN      },
@@ -455,21 +428,14 @@ function buildGatedStructure(acts, completedSet, currentMissionId) {
 }
 
 // ── GET /structure/:rawgId ────────────────────────────────────────────────────
-// 1. Check DB — return immediately if found
-// 2. Look up game in library to get title + slug
-// 3. Auto-construct wiki URLs and scrape
-// 4. Save to DB and return
-// 5. If scraping fails, return { status: 'unavailable' } with 404
 
 structureRouter.get('/:rawgId', async (req, res) => {
   const rawgId = Number(req.params.rawgId)
 
   try {
-    // ── Step 1: DB hit ────────────────────────────────────────────────────────
     let structure = await GameStructure.findOne({ rawgId }).lean()
 
     if (!structure) {
-      // ── Step 2: Get game info from library ───────────────────────────────────
       const game = await Game.findOne({ rawgId }).lean()
       if (!game) {
         return res.status(404).json({
@@ -478,15 +444,10 @@ structureRouter.get('/:rawgId', async (req, res) => {
         })
       }
 
-      // ── Step 3: Build URLs — curated targets win over auto-construction ────────
       console.log(`[structure] No DB entry for "${game.title}" — attempting wiki scrape`)
       const target = TARGETS_BY_RAWGID[rawgId]
       const urls   = target
         ? {
-            powerpyxUrls: target.powerpyx ? [target.powerpyx] : [],
-            ignUrls:      target.ign      ? [target.ign]      : [],
-            fandomUrls:   target.fandom   ? [target.fandom]   : [],
-            // Also append auto-constructed URLs as fallback
             ...(() => {
               const auto = buildCandidateUrls(game.title, game.slug)
               return {
@@ -510,7 +471,6 @@ structureRouter.get('/:rawgId', async (req, res) => {
         })
       }
 
-      // ── Step 4: Save to DB ────────────────────────────────────────────────────
       await GameStructure.findOneAndUpdate(
         { rawgId },
         {
@@ -528,7 +488,6 @@ structureRouter.get('/:rawgId', async (req, res) => {
       console.log(`[structure] Saved "${game.title}" — ${structure.acts.length} acts`)
     }
 
-    // ── Step 5: Build gated response ─────────────────────────────────────────
     const progress = await UserGameProgress.findOne({ userId: req.userId, rawgId })
 
     const completedSet     = new Set(progress?.completedMissions || [])
@@ -589,35 +548,25 @@ progressRouter.post('/:rawgId/complete', async (req, res) => {
   const rawgId        = Number(req.params.rawgId)
   const { missionId } = req.body
 
-  if (!missionId) {
-    return res.status(400).json({ message: 'missionId is required' })
-  }
+  if (!missionId) return res.status(400).json({ message: 'missionId is required' })
 
   try {
     const structure = await GameStructure.findOne({ rawgId })
-    if (!structure) {
-      return res.status(404).json({ message: 'No story structure available for this game' })
-    }
+    if (!structure) return res.status(404).json({ message: 'No story structure available for this game' })
 
     const allMissionIds = structure.acts.flatMap(a => a.missions.map(m => m.id))
-
-    if (!allMissionIds.includes(missionId)) {
+    if (!allMissionIds.includes(missionId))
       return res.status(400).json({ message: 'Invalid missionId for this game' })
-    }
 
     let progress = await UserGameProgress.findOne({ userId: req.userId, rawgId })
-
     if (!progress) {
       progress = new UserGameProgress({
-        userId:            req.userId,
-        rawgId,
-        completedMissions: [],
-        currentMissionId:  null,
+        userId: req.userId, rawgId,
+        completedMissions: [], currentMissionId: null,
       })
     }
 
     const completedSet = new Set(progress.completedMissions)
-
     if (!completedSet.has(missionId)) {
       completedSet.add(missionId)
       progress.completedMissions = Array.from(completedSet)
@@ -625,6 +574,24 @@ progressRouter.post('/:rawgId/complete', async (req, res) => {
 
     progress.currentMissionId = resolveCurrent(allMissionIds, completedSet)
     await progress.save()
+
+    // ── Activity log ─────────────────────────────────────────────────────────
+    let missionTitle = missionId
+    for (const act of structure.acts) {
+      const found = act.missions.find(m => m.id === missionId)
+      if (found) { missionTitle = found.title; break }
+    }
+
+    const game = await Game.findOne({ userId: req.userId, rawgId }).lean()
+
+    await ActivityLog.create({
+      userId:    req.userId,
+      rawgId,
+      gameTitle: structure.title,
+      cover:     game?.cover || null,
+      eventType: 'mission_completed',
+      label:     `Completed "${missionTitle}" in ${structure.title}`,
+    })
 
     res.json({
       completedMissions: progress.completedMissions,
