@@ -10,6 +10,7 @@ import {
   IconAlertTriangle,
   IconRotate,
   IconDeviceGamepad2,
+  IconWorld,
 } from '@tabler/icons-react'
 
 const ce = React.createElement
@@ -38,7 +39,6 @@ function ProgressBar({ completed, total }) {
 }
 
 function MissionRow({ mission, isReadOnly, onComplete, completing }) {
-  // Locked
   if (mission.locked) {
     return ce('div', { className: 'gdm-mission gdm-mission--locked' },
       ce('div', { className: 'gdm-mission-lock-icon' },
@@ -50,7 +50,6 @@ function MissionRow({ mission, isReadOnly, onComplete, completing }) {
     )
   }
 
-  // Completed
   if (mission.completed) {
     return ce('div', { className: 'gdm-mission gdm-mission--completed' },
       ce('div', { className: 'gdm-mission-check' },
@@ -60,7 +59,6 @@ function MissionRow({ mission, isReadOnly, onComplete, completing }) {
     )
   }
 
-  // Current — show description teaser if available
   if (mission.current) {
     return ce('div', { className: 'gdm-mission gdm-mission--current' },
       ce('div', { className: 'gdm-mission-current-left' },
@@ -87,7 +85,6 @@ function MissionRow({ mission, isReadOnly, onComplete, completing }) {
     )
   }
 
-  // Upcoming (safe fallback)
   return ce('div', { className: 'gdm-mission gdm-mission--upcoming' },
     ce('div', { className: 'gdm-mission-upcoming-dot' }),
     ce('span', { className: 'gdm-mission-title' }, mission.title)
@@ -146,14 +143,13 @@ function ActSection({ act, isReadOnly, onComplete, completing }) {
 // ── Main Modal ────────────────────────────────────────────────────────────────
 
 export default function GameDetailModal({ game, isReadOnly, onClose }) {
-  const [structure,   setStructure]   = useState(null)
-  const [loading,     setLoading]     = useState(true)
-  const [error,       setError]       = useState(null)
-  const [completing,  setCompleting]  = useState(null)
-  const [resetting,   setResetting]   = useState(false)
-  const [showConfirm, setShowConfirm] = useState(false)
-
-  const noStructure = error === 'no_structure'
+  const [structure,    setStructure]   = useState(null)
+  const [loading,      setLoading]     = useState(true)
+  const [error,        setError]       = useState(null)   // null | 'unavailable' | 'fetch_failed'
+  const [scraping,     setScraping]    = useState(false)  // true while server is scraping wiki
+  const [completing,   setCompleting]  = useState(null)
+  const [resetting,    setResetting]   = useState(false)
+  const [showConfirm,  setShowConfirm] = useState(false)
 
   useEffect(() => {
     function onKey(e) { if (e.key === 'Escape') onClose() }
@@ -161,21 +157,38 @@ export default function GameDetailModal({ game, isReadOnly, onClose }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
 
-  const fetchStructure = useCallback(async () => {
-    setLoading(true)
+  const fetchStructure = useCallback(async ({ isScrapeAttempt = false } = {}) => {
+    // Show a distinct "scraping" spinner when the user explicitly triggers a
+    // wiki fetch — the request may take several seconds.
+    if (isScrapeAttempt) {
+      setScraping(true)
+    } else {
+      setLoading(true)
+    }
     setError(null)
+
     try {
       const res  = await fetch(`${API_URL}/structure/${game.rawgId}`, {
         headers: { Authorization: `Bearer ${getToken()}` }
       })
       const data = await res.json()
-      if (res.status === 404) { setError('no_structure'); return }
-      if (!res.ok)            { setError('fetch_failed'); return }
+
+      if (!res.ok) {
+        // Server returns { status: 'unavailable' } when scraping also failed
+        if (data.status === 'unavailable') {
+          setError('unavailable')
+        } else {
+          setError('fetch_failed')
+        }
+        return
+      }
+
       setStructure(data)
     } catch {
       setError('fetch_failed')
     } finally {
       setLoading(false)
+      setScraping(false)
     }
   }, [game.rawgId])
 
@@ -221,6 +234,7 @@ export default function GameDetailModal({ game, isReadOnly, onClose }) {
   },
     ce('div', { className: 'gdm-modal', role: 'dialog', 'aria-modal': 'true' },
 
+      // ── Cover ────────────────────────────────────────────────────────────
       ce('div', {
         className: 'gdm-cover',
         style: { backgroundImage: game.cover ? `url(${game.cover})` : 'none' }
@@ -240,25 +254,40 @@ export default function GameDetailModal({ game, isReadOnly, onClose }) {
         )
       ),
 
+      // ── Body ─────────────────────────────────────────────────────────────
       ce('div', { className: 'gdm-body' },
 
-        noStructure && ce('div', { className: 'gdm-no-structure' },
-          ce(IconDeviceGamepad2, { size: 36, stroke: 1 }),
-          ce('p',    null, 'Story tracker not available for this game yet'),
-          ce('span', null, 'Check back later or add it to game-structures.json')
-        ),
-
-        !noStructure && loading && ce('div', { className: 'gdm-loading' },
+        // Loading (initial fetch)
+        loading && ce('div', { className: 'gdm-loading' },
           ce(IconLoader2, { size: 24, stroke: 1.5, className: 'gdm-spin' })
         ),
 
-        !noStructure && !loading && error === 'fetch_failed' && ce('div', { className: 'gdm-error' },
-          ce(IconAlertTriangle, { size: 24, stroke: 1.5 }),
-          ce('p', null, 'Failed to load story structure'),
-          ce('button', { className: 'gdm-retry-btn', onClick: fetchStructure }, 'Retry')
+        // Scraping (wiki fetch in progress — can take a few seconds)
+        !loading && scraping && ce('div', { className: 'gdm-scraping' },
+          ce(IconLoader2, { size: 22, stroke: 1.5, className: 'gdm-spin' }),
+          ce('p', null, 'Fetching chapters from wiki…'),
+          ce('span', null, 'This may take a few seconds')
         ),
 
-        !noStructure && !loading && !error && structure && ce(React.Fragment, null,
+        // Unavailable — server tried scraping and gave up
+        !loading && !scraping && error === 'unavailable' && ce('div', { className: 'gdm-no-structure' },
+          ce(IconDeviceGamepad2, { size: 36, stroke: 1 }),
+          ce('p',    null, 'No chapter data found for this game'),
+          ce('span', null, 'We checked PowerPyx, IGN and Fandom but couldn\'t parse a structure')
+        ),
+
+        // Fetch failed (network error)
+        !loading && !scraping && error === 'fetch_failed' && ce('div', { className: 'gdm-error' },
+          ce(IconAlertTriangle, { size: 24, stroke: 1.5 }),
+          ce('p', null, 'Failed to load story structure'),
+          ce('button', {
+            className: 'gdm-retry-btn',
+            onClick:   () => fetchStructure()
+          }, 'Retry')
+        ),
+
+        // Structure loaded
+        !loading && !scraping && !error && structure && ce(React.Fragment, null,
 
           ce(ProgressBar, {
             completed: structure.completedCount,
@@ -301,7 +330,7 @@ export default function GameDetailModal({ game, isReadOnly, onClose }) {
           ce('div', { className: 'gdm-acts' },
             ...structure.acts.map((act, i) =>
               ce(ActSection, {
-                key:       act.id || i,
+                key:        act.id || i,
                 act,
                 isReadOnly,
                 onComplete: completeMission,

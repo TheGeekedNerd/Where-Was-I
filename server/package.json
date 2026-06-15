@@ -27,6 +27,7 @@
     "passport-discord": "^0.1.4",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
+    "playwright": "^1.60.0",
     "resend": "^6.12.4",
     "slugify": "^1.6.9"
   },
