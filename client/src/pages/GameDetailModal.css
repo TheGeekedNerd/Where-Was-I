@@ -496,3 +496,28 @@
   .gdm-cover       { height: 130px; }
   .gdm-cover-title { font-size: 17px; }
 }
+
+/* ── Scraping state (wiki fetch in progress) ── */
+/* Add this block to the bottom of GameDetailModal.css */
+
+.gdm-scraping {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: rgba(0, 255, 137, 0.4);
+}
+
+.gdm-scraping p {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.gdm-scraping span {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.2);
+}
