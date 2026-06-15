@@ -131,7 +131,7 @@ function Dashboard() {
     }, message),
 
     ce('div', { className: 'dashboard-content' },
-      activePage === 'overview'  && ce(Overview),
+      activePage === 'overview'  && ce(Overview, { onNavigate: setActivePage }),
       activePage === 'my-games'  && ce(MyGames),
       activePage === 'discover'  && ce(Discover),
       activePage === 'completed' && ce(Completed),
