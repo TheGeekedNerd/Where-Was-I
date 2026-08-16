@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log in — Where Was I?</title>
+    <link rel="stylesheet" href="./login.css" />
+</head>
+<body>
+    <div class="auth-wrapper">
+    <div class="panel image-panel login-panel">
+        <div class="slide slide-1 slide-odd"></div>
+        <div class="slide slide-2 slide-even"></div>
+        <div class="slide slide-3 slide-odd"></div>
+        <div class="slide slide-4 slide-even"></div>
+        <div class="slide slide-5 slide-odd"></div>
+        <div class="slide slide-6 slide-even"></div>
+        <div class="overlay"></div>
+    </div>
+
+    <div class="panel form-panel">
+        <div class="form-box">
+        <h1 class="auth-title">Welcome back</h1>
+        <p class="auth-sub">Log in to your account</p>
+        <p class="auth-message" id="message"></p>
+
+        <label class="field-label">Email</label>
+        <input class="field-input" type="email" id="email" placeholder="you@email.com" />
+
+        <label class="field-label">Password</label>
+        <input class="field-input" type="password" id="password" placeholder="••••••••" />
+
+        <p class="switch-text" style="text-align:right; margin-bottom:14px; margin-top:-8px;">
+            <span class="switch-link" id="forgot-link">Forgot password?</span>
+        </p>
+
+        <button class="primary-btn" id="login-btn">Log in</button>
+
+        <div class="divider">
+            <div class="divider-line"></div>
+            <span class="divider-text">or continue with</span>
+            <div class="divider-line"></div>
+        </div>
+
+        <div class="social-row">
+            <button class="social-btn" id="google-btn">Google</button>
+            <button class="social-btn" id="discord-btn">Discord</button>
+        </div>
+
+        <p class="switch-text">
+            Don't have an account? <span class="switch-link" id="register-link">Register</span>
+        </p>
+        </div>
+    </div>
+    </div>
+
+    <script type="module" src="./login.js"></script>
+</body>
+</html>

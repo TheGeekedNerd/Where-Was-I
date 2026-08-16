@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — Where Was I?</title>
+  <link rel="stylesheet" href="./register.css" />
+</head>
+<body>
+  <div class="auth-wrapper">
+    <div class="panel form-panel">
+      <div class="form-box">
+        <h1 class="auth-title">Create account</h1>
+        <p class="auth-sub">Start tracking your games</p>
+        <p class="auth-message" id="message"></p>
+
+        <label class="field-label">Username</label>
+        <input class="field-input" type="text" id="username" placeholder="TheGeekedNerd" />
+
+        <label class="field-label">Email</label>
+        <input class="field-input" type="email" id="email" placeholder="you@email.com" />
+
+        <label class="field-label">Password</label>
+        <input class="field-input" type="password" id="password" placeholder="••••••••" />
+
+        <button class="primary-btn" id="register-btn">Create account</button>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span class="divider-text">or continue with</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <div class="social-row">
+          <button class="social-btn" id="google-btn">Google</button>
+          <button class="social-btn" id="discord-btn">Discord</button>
+        </div>
+
+        <p class="switch-text">
+          Already have an account? <span class="switch-link" id="login-link">Log in</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="panel image-panel register-panel">
+      <div class="slide slide-1 slide-odd"></div>
+      <div class="slide slide-2 slide-even"></div>
+      <div class="slide slide-3 slide-odd"></div>
+      <div class="slide slide-4 slide-even"></div>
+      <div class="slide slide-5 slide-odd"></div>
+      <div class="slide slide-6 slide-even"></div>
+      <div class="overlay"></div>
+    </div>
+  </div>
+
+  <script type="module" src="./register.js"></script>
+</body>
+</html>
