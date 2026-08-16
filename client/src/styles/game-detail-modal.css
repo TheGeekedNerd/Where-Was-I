@@ -3,6 +3,7 @@
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.75);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   z-index: 200;
   display: flex;
@@ -292,6 +293,7 @@
 .gdm-act-title--blurred {
   color: transparent;
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
+  -webkit-user-select: none;
   user-select: none;
 }
 
@@ -404,6 +406,7 @@
 .gdm-mission-title--blurred {
   color: transparent;
   text-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+  -webkit-user-select: none;
   user-select: none;
 }
 
