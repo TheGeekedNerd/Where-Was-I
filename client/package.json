@@ -5,8 +5,5 @@
   "type": "module",
   "scripts": {
     "dev": "npx serve . -l 5173"
-  },
-  "dependencies": {
-    "@auth0/auth0-spa-js": "^2.24.1"
   }
 }

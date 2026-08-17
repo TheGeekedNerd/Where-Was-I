@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+  "dev": "npx serve . -l 5173",
+  "build": "echo 'no build needed — static site'"
   },
   "keywords": [],
   "author": "",

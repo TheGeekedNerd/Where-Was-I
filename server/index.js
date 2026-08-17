@@ -116,7 +116,7 @@ app.post('/auth/forgot-password', async (req, res) => {
     user.resetToken = token
     user.resetTokenExpiry = Date.now() + 1000 * 60 * 60
     await user.save()
-    const resetLink = `${process.env.CLIENT_URL}/reset-password/${token}`
+    const resetLink = `${process.env.CLIENT_URL}/src/pages/reset-password/reset-password.html?token=${token}`
     await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: user.email,
