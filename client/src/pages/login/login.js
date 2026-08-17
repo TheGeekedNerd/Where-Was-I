@@ -1,9 +1,9 @@
 import { redirectIfLoggedIn } from '../../shared/auth-guard.js'
 import { loginWithConnection } from '../../shared/auth.js'
+import { API_URL } from '../../shared/config.js'
 
 await redirectIfLoggedIn()
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
 const emailInput = document.getElementById('email')
 const passwordInput = document.getElementById('password')

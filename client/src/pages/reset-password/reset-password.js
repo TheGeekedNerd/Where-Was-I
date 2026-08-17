@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+import { API_URL } from '../../shared/config.js'
 
 // Token comes from ?token=... instead of a route param
 const token = new URLSearchParams(window.location.search).get('token')

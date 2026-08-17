@@ -1,10 +1,8 @@
 import { redirectIfLoggedIn } from '../../shared/auth-guard.js'
 import { loginWithConnection } from '../../shared/auth.js'
+import { API_URL } from '../../shared/config.js'
 
 await redirectIfLoggedIn()
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
-
 const usernameInput = document.getElementById('username')
 const emailInput = document.getElementById('email')
 const passwordInput = document.getElementById('password')
@@ -39,7 +37,7 @@ async function handleRegister() {
 
     if (res.status === 201) {
       setTimeout(() => {
-        window.location.href = '/src/pages/dashboard/dashboard.html'
+        window.location.href = '/src/pages/dashboard/overview.html'
       }, 2000)
     }
   } catch {

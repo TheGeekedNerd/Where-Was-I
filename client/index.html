@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Where Was I?</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Where Was I?</title>
+</head>
+<body>
+  <script type="module">
+    import { isAuth0Authenticated, logout } from '/src/shared/auth.js'
+
+    localStorage.removeItem('token')
+    localStorage.removeItem('wwi_last_activity')
+
+    if (await isAuth0Authenticated()) {
+      await logout()
+    } else {
+      window.location.replace('/src/pages/login/login.html')
+    }
+  </script>
+</body>
 </html>

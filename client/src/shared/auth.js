@@ -1,7 +1,5 @@
-import { createAuth0Client } from '@auth0/auth0-spa-js'
-
-const AUTH0_DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN
-const AUTH0_CLIENT_ID = import.meta.env.VITE_AUTH0_CLIENT_ID
+import { createAuth0Client } from 'https://cdn.jsdelivr.net/npm/@auth0/auth0-spa-js@2.1/dist/auth0-spa-js.production.esm.js'
+import { AUTH0_DOMAIN, AUTH0_CLIENT_ID } from './config.js'
 
 let auth0Client = null
 

@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+import { API_URL } from '../../shared/config.js'
 
 const emailInput = document.getElementById('email')
 const messageEl = document.getElementById('message')
