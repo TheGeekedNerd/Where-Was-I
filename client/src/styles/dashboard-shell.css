@@ -84,28 +84,34 @@ html, body {
   color: #00ff89;
 }
 
-/* ── Avatar (fallback — replace if you find the original rules) ── */
+/* ── Avatar (real rules, ported from Settings.css) ── */
 .nav-avatar {
-  width: 32px;
-  height: 32px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
+  background: rgba(0, 255, 137, 0.06);
+  border: 1.5px solid rgba(0, 255, 137, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: rgba(0, 255, 137, 0.5);
   cursor: pointer;
-  background: rgba(0, 255, 137, 0.08);
-  color: #00ff89;
-  overflow: hidden;
   flex-shrink: 0;
+  overflow: hidden;
+  transition: border-color 0.2s;
+  margin-left: auto;
 }
+
+.nav-avatar:hover { border-color: rgba(0, 255, 137, 0.5); }
 
 .nav-avatar-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
 }
 
-/* ── Sync message (fallback) ── */
+/* ── Sync message (fallback — replace if you find the original rules) ── */
 .nav-message {
   text-align: center;
   padding: 10px;

@@ -398,29 +398,22 @@
   line-height: 1.5;
 }
 
-/* ── Navbar avatar ── */
-.nav-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: rgba(0, 255, 137, 0.06);
-  border: 1.5px solid rgba(0, 255, 137, 0.2);
+/* ── Un-fix the "modal" so it sits as normal page content instead of an overlay ── */
+.settings-page {
   display: flex;
-  align-items: center;
   justify-content: center;
-  color: rgba(0, 255, 137, 0.5);
-  cursor: pointer;
-  flex-shrink: 0;
-  overflow: hidden;
-  transition: border-color 0.2s;
-  margin-left: auto;
 }
 
-.nav-avatar:hover { border-color: rgba(0, 255, 137, 0.5); }
-
-.nav-avatar-img {
+.settings-overlay {
+  position: static;
+  background: none;
+  padding: 0;
+  animation: none;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.settings-modal {
+  margin-top: 1rem;
 }
